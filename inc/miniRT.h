@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/04 19:10:14 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/04 19:33:50 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ typedef struct s_rt
 {
 	void	*mlx;
 	void	*win;
+	int		win_x;
+	int		win_y;
+	char	*title;
 }	t_rt;
+
+void	init(t_rt *p);
+int		close_win(void *param);
+int		handler_key(int keycode, void *param);
 
 #endif

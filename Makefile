@@ -6,7 +6,7 @@
 #    By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/04 19:00:42 by xlok             ###   ########.fr        #
+#    Updated: 2025/01/04 19:29:54 by xlok             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ INC_FLAG := -Iinc -I$(LIB_DIR)/inc -I$(MLX_DIR)
 LINK := -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 
 SRC_DIR := src
-SRC_F := main.c
+SRC_F := main.c \
+		 init.c \
+		 handler.c
 
 SRC := $(SRC_F:%.c=$(SRC_DIR)/%.c)
 
