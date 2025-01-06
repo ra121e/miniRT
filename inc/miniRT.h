@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/04 19:33:50 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/06 20:11:02 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 # include <math.h>
 # include "libft.h"
 
+typedef struct	s_vec3
+{
+	double	x;
+	double	y;
+	double	z;
+} t_vec3;
+
 typedef struct s_rt
 {
 	void	*mlx;
@@ -36,5 +43,19 @@ typedef struct s_rt
 void	init(t_rt *p);
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
+
+// vector utils
+
+t_vec3	vec3_init(double x, double y, double z);
+t_vec3	vec3_add(t_vec3 a, t_vec3 b);
+t_vec3	vec3_sub(t_vec3 a, t_vec3 b);
+t_vec3	vec3_mult(t_vec3 a, double b);
+t_vec3	vec3_dot(t_vec3 a, t_vec3 b);
+t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
+double	vec3_mag(t_vec3 a);
+t_vec3	vec3_normalize(t_vec3 a);
+int		get_vec3_from_str(t_vec3 *vec, char *str);
+
+
 
 #endif
