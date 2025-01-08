@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/08 11:27:45 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/08 13:20:43 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,118 @@
 # include <mlx.h>
 # include <math.h>
 # include "libft.h"
+# include "mlx_int.h"
 
-typedef struct s_vec3
+typedef struct s_vec3			t_vec3;
+typedef struct s_dlist			t_dlist;
+typedef struct s_ray			t_ray;
+typedef struct s_intersection	t_intersection;
+typedef struct s_fcolor			t_fcolor;
+typedef struct s_object			t_object;
+typedef struct s_camera			t_camera;
+typedef struct s_material		t_material;
+typedef struct s_light			t_light;
+
+// math
+// vector
+struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_vec3;
+};
 
-typedef struct s_dlist
+// ray (line in math)
+struct s_ray
+{
+	t_vec3	start;
+	t_vec3	direction;
+};
+
+// intersection
+struct s_intersection
+{
+	bool	has_intersection;
+	double	distance;
+	t_vec3	position;
+	t_vec3	normal;
+};
+
+// color factor
+struct s_fcolor
+{
+	double	red;
+	double	green;
+	double	blue;
+};
+
+// constants(konstant) of material
+struct s_material
+{
+	t_fcolor	kdif;
+	t_fcolor	kspe;
+	float		shine;
+};
+
+enum	e_shape
+{
+	PLANE,
+	SPHERE,
+	SQUARE,
+	CYLINDER,
+	TRIANGLE
+};
+
+struct s_object
+{
+	enum e_shape	type;
+	t_vec3			center;
+	t_vec3			normal;
+	double			radius;
+	double			side_size;
+	double			height;
+	t_material		material;
+	t_vec3			p1;
+	t_vec3			p2;
+	t_vec3			p3;
+};
+
+struct s_camera
+{
+	t_vec3	pos;
+	t_vec3	orientation;
+	double	fov;
+	t_vec3	x_basis;
+	t_vec3	y_basis;
+	t_vec3	d_venter;
+	t_img	img;
+};
+
+// light source
+struct s_light
+{
+	t_vec3		position;
+	t_fcolor	intensity;
+};
+
+// data structure
+
+struct s_dlist
 {
 	void	*content;
 	struct s_dlist	*next;
 	struct s_dlist	*prev;
-}	t_dlist;
+};
 
 typedef struct s_rt
 {
 	void	*mlx;
 	void	*win;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_size;
+	int		endian;
 	int		win_x;
 	int		win_y;
 	char	*title;
