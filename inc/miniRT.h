@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/08 20:37:21 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/08 21:48:38 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct s_rt
 }	t_rt;
 
 int		input_validation(char *arg);
-int		init(t_rt *p);
+int		init(t_rt *p, char *rt);
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
 
