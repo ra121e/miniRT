@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
+/*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:31:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/04 19:33:23 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/08 16:45:32 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ int	main(int argc, char **argv)
 		exit(1);
 	}
 	(void)argv;
-	init(p);
-	p->mlx = mlx_init();
-	p->win = mlx_new_window(p->mlx, p->win_x, p->win_y, p->title);
+	if (init(p) == 1)
+		return (0);
+//	p->mlx = mlx_init();
+//	p->win = mlx_new_window(p->mlx, p->win_x, p->win_y, p->title);
+	printf("after initilize\n");
+	raytracing(p);
+	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 //	render(p);
 	mlx_hook(p->win, DestroyNotify, NoEventMask, close_win, p);
 	mlx_hook(p->win, KeyPress, KeyPressMask, handler_key, p);

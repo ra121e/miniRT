@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/08 13:20:43 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:28:54 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,19 +128,23 @@ struct s_dlist
 
 typedef struct s_rt
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_size;
-	int		endian;
-	int		win_x;
-	int		win_y;
-	char	*title;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_size;
+	int			endian;
+	int			win_x;
+	int			win_y;
+	char		*title;
+	t_dlist		*camera;
+	t_list		*object;
+	t_fcolor	ambient;
+	t_list		*light;
 }	t_rt;
 
-void	init(t_rt *p);
+int		init(t_rt *p);
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
 
@@ -162,6 +166,7 @@ t_dlist	*dlst_new(void *content);
 t_dlist	*dlst_add_right(t_dlist **lst, t_dlist *new);
 
 
+int	raytracing(t_rt *p);
 
 
 #endif
