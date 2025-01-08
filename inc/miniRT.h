@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
+/*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/06 20:11:02 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/08 10:41:54 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H 
-# define MINIRT_H 
+#ifndef MINIRT_H
+# define MINIRT_H
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -24,12 +24,19 @@
 # include <math.h>
 # include "libft.h"
 
-typedef struct	s_vec3
+typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-} t_vec3;
+}	t_vec3;
+
+typedef struct s_dlist
+{
+	void	*content;
+	struct s_dlist	*next;
+	struct s_dlist	*prev;
+}	t_dlist;
 
 typedef struct s_rt
 {
