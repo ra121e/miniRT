@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/08 16:30:50 by athonda          ###   ########.fr        #
+#    Updated: 2025/01/08 20:40:46 by xlok             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ LINK := -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 
 SRC_DIR := src
 SRC_F := main.c \
+		 input_validation.c \
 		 init.c \
 		 handler.c \
 		 ft_atof.c \
