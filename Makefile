@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+         #
+#    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/04 19:29:54 by xlok             ###   ########.fr        #
+#    Updated: 2025/01/08 11:21:47 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,10 @@ LINK := -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 SRC_DIR := src
 SRC_F := main.c \
 		 init.c \
-		 handler.c
+		 handler.c \
+		 ft_atof.c \
+		 vec3.c \
+		 dlist.c
 
 SRC := $(SRC_F:%.c=$(SRC_DIR)/%.c)
 

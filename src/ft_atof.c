@@ -6,11 +6,11 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:19:45 by athonda           #+#    #+#             */
-/*   Updated: 2024/09/17 23:24:50 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/08 11:23:36 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "miniRT.h"
 
 int	ft_isspace(char c)
 {
