@@ -6,23 +6,23 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 15:16:29 by xlok              #+#    #+#             */
-/*   Updated: 2024/12/26 15:16:42 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/09 21:03:57 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_str_array(char **str)
+void	ft_free_array(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (arr[i])
 	{
-		free(str[i]);
-		str[i] = 0;
+		free(arr[i]);
+		arr[i] = 0;
 		i++;
 	}
-	free(str);
-	str = 0;
+	free(arr);
+	arr = 0;
 }

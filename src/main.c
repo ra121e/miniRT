@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:31:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/08 21:40:51 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/09 22:57:49 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		ft_dprintf(2, "Failed to malloc struct\n");
 		exit(1);
 	}
-	if (init(p, argv[1]))
+	if (init(p))
 		return (1);//cleanup before exit
 	printf("after initilize\n");
 	raytracing(p);

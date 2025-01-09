@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:47:48 by xlok              #+#    #+#             */
-/*   Updated: 2024/12/26 15:20:40 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/09 21:03:32 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void	free_str(char *str);
-void	free_str_array(char **str);
+void	ft_free_str(char *str);
+void	ft_free_array(char **arr);
 
 #endif
