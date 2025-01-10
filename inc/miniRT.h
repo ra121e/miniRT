@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/09 23:07:30 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/10 07:51:17 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ int		get_vec3_from_str(t_vec3 *vec, char *str);
 
 // general utils
 
+int		is_int(char *str);
+int		is_double(char *str);
 double	ft_atof(char *str);
 
 // dlist

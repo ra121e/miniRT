@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/09 23:07:49 by xlok             ###   ########.fr        #
+#    Updated: 2025/01/10 07:35:05 by xlok             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_DIR := src
 SRC_F := main.c \
 		 input_validation.c \
 		 validate_acl.c \
+		 utils.c \
 		 init.c \
 		 handler.c \
 		 ft_atof.c \
