@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/08 16:30:25 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/10 13:28:06 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,34 @@ void	init_value(t_rt *p)
 	p->title = "miniRT";
 }
 
+void	init_camera(t_rt *p)
+{
+	// these values will be from rt file
+	p->c.position = vec3_init(0, 0, 0);
+	p->c.orientation = vec3_init(0.1, 0, 1);
+	p->c.fov = deg2rad(70);
+	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
+	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
+
+	p->c.x_basis.x = p->c.d_center.z / sqrt(p->c.d_center.z * p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
+	p->c.x_basis.y = 0;
+	p->c.x_basis.z = -p->c.d_center.x / sqrt(p->c.d_center.z * p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
+	p->c.y_basis = vec3_normalize(vec3_cross(p->c.x_basis, vec3_mult(p->c.d_center, -1)));
+}
+
+void	init_sphere(t_rt *p)
+{
+	p->sp.type = SPHERE;
+	p->sp.center = vec3_init(0, 0, 20.6);
+	p->sp.radius = 6.3;
+}
+
 int	init(t_rt *p)
 {
 //	matrix_projection();
 	init_value(p);
+	init_camera(p);
+	init_sphere(p);
 	p->mlx = mlx_init();
 	if (p->mlx == NULL)
 		return (1);
