@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:19:45 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/08 11:23:36 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/10 18:20:41 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ double	ft_atof(char *str)
 {
 	double	nb;
 	double	nb_dec;
+	int		dp;
 	int		i;
 	int		sign;
 
@@ -53,13 +54,13 @@ double	ft_atof(char *str)
 	}
 	if (str[i] == '.')
 		i++;
-	nb_dec = 0.1;
+	dp = 0;
+	nb_dec = 0;
 	while (str[i] != '\0' && ft_isdigit(str[i]))
 	{
-		nb = nb + nb_dec * (str[i] - '0');
-		nb_dec *= 0.1;
-		i++;
+		nb_dec = nb_dec * 10 + (str[i++] - '0');
+		dp++;
 	}
-	nb = (nb + nb_dec * 0.1) * sign;
-	return (nb);
+	nb = nb + nb_dec / pow(10, dp);
+	return (nb * sign);
 }
