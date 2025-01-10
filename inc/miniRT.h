@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 07:51:17 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/10 19:12:33 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # include <math.h>
 # include "libft.h"
 # include "mlx_int.h"
+
+// x,y,z coordinates limits in input validation
+
+# define XYZ_MIN -400
+# define XYZ_MAX 400
 
 typedef struct s_vec3			t_vec3;
 typedef struct s_dlist			t_dlist;
@@ -144,11 +149,28 @@ typedef struct s_rt
 	t_list		*light;
 }	t_rt;
 
+// input validation
+
 int		input_validation(char *arg);
 int		validate_acl(char **e);
+int		validate_obj(char **e);
+
+// input validation utils
+
+int		validate_rgb(char *str);
+int		validate_vec3(char *str, double min, double max);
+
+// general
+
 int		init(t_rt *p);
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
+
+// general utils
+
+int		is_int(char *str);
+int		is_double(char *str);
+double	ft_atof(char *str);
 
 // vector utils
 
@@ -161,12 +183,6 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
 double	vec3_mag(t_vec3 a);
 t_vec3	vec3_normalize(t_vec3 a);
 int		get_vec3_from_str(t_vec3 *vec, char *str);
-
-// general utils
-
-int		is_int(char *str);
-int		is_double(char *str);
-double	ft_atof(char *str);
 
 // dlist
 

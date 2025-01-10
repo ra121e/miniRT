@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:32:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 08:05:48 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/10 18:52:32 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	validate_element(char **e)
 	if (!ft_strncmp(e[0], "A", 2) || !ft_strncmp(e[0], "C", 2)
 		|| !ft_strncmp(e[0], "L", 2))
 		return (validate_acl(e));
-//	else if (!ft_strncmp(e[0], "pl", 3) || !ft_strncmp(e[0], "sp", 3) || !ft_strncmp(e[0], "cy", 3))
-//		return (validate_obj(e));
+	else if (!ft_strncmp(e[0], "pl", 3) || !ft_strncmp(e[0], "sp", 3)
+		|| !ft_strncmp(e[0], "cy", 3))
+		return (validate_obj(e));
 	else
 		return (ft_dprintf(2, "Error\nInvalid element identifier\n"), 1);
 	return (0);
