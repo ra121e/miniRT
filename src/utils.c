@@ -6,11 +6,16 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 07:26:00 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 08:15:08 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/11 18:19:28 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+int	is_int(char *str)
+{
+	return (a / 180 * M_PI);
+}
 
 int	is_int(char *str)
 {

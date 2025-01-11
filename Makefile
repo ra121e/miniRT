@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/10 18:50:40 by xlok             ###   ########.fr        #
+#    Updated: 2025/01/11 18:17:29 by xlok             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,16 @@ LINK := -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 
 SRC_DIR := src
 SRC_F := main.c \
+		 utils.c \
 		 input_validation.c \
 		 validate_utils.c \
 		 validate_acl.c \
 		 validate_obj.c \
-		 utils.c \
 		 init.c \
+		 init_utils.c \
+		 init_file.c \
+		 init_acl.c \
+		 init_obj.c \
 		 handler.c \
 		 ft_atof.c \
 		 vec3.c \

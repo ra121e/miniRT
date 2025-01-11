@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 19:12:33 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/11 18:18:04 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_ray			t_ray;
 typedef struct s_intersection	t_intersection;
 typedef struct s_fcolor			t_fcolor;
 typedef struct s_object			t_object;
+typedef struct s_a_light		t_a_light;
 typedef struct s_camera			t_camera;
 typedef struct s_material		t_material;
 typedef struct s_light			t_light;
@@ -66,11 +67,12 @@ struct s_intersection
 };
 
 // color factor
+// rgb int not double
 struct s_fcolor
 {
-	double	red;
-	double	green;
-	double	blue;
+	int	r;
+	int	g;
+	int	b;
 };
 
 // constants(konstant) of material
@@ -97,11 +99,19 @@ struct s_object
 	t_vec3			normal;
 	double			radius;
 	double			side_size;
+	double			diameter;
 	double			height;
 	t_material		material;
 	t_vec3			p1;
 	t_vec3			p2;
 	t_vec3			p3;
+};
+
+// Ambient lighting
+struct s_a_light
+{
+	double		intensity;
+	t_fcolor	color;
 };
 
 struct s_camera
@@ -119,7 +129,8 @@ struct s_camera
 struct s_light
 {
 	t_vec3		position;
-	t_fcolor	intensity;
+	double		intensity;//intensity should be double not rgb
+	t_fcolor	color;
 };
 
 // data structure
@@ -143,10 +154,15 @@ typedef struct s_rt
 	int			win_x;
 	int			win_y;
 	char		*title;
-	t_dlist		*camera;
-	t_list		*object;
-	t_fcolor	ambient;
-	t_list		*light;
+	t_camera	c;
+	t_object	sp;
+	t_object	pl;
+	t_object	cy;
+	t_light		l;
+	t_a_light	a;
+//	t_dlist		*camera;
+//	t_list		*object;
+//	t_list		*light;
 }	t_rt;
 
 // input validation
@@ -160,9 +176,20 @@ int		validate_obj(char **e);
 int		validate_rgb(char *str);
 int		validate_vec3(char *str, double min, double max);
 
+// init
+
+int		init(t_rt *p, char *rt);
+int		init_file(char *rt, t_rt *p);
+int		init_acl(char **e, t_rt *p);
+int		init_obj(char **e, t_rt *p);
+
+// init utils
+
+int		init_rgb(char *str, t_fcolor *p);
+int		init_vec3(char *str, t_vec3 *p);
+
 // general
 
-int		init(t_rt *p);
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
 
@@ -189,8 +216,6 @@ int		get_vec3_from_str(t_vec3 *vec, char *str);
 t_dlist	*dlst_new(void *content);
 t_dlist	*dlst_add_right(t_dlist **lst, t_dlist *new);
 
-
 int	raytracing(t_rt *p);
-
 
 #endif

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_validation.c                                 :+:      :+:    :+:   */
+/*   init_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:32:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/11 18:18:53 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/11 17:45:12 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	validate_element(char **e)
+int	init_element(char **e, t_rt *p)
 {
 	if (!ft_strncmp(e[0], "A", 2) || !ft_strncmp(e[0], "C", 2)
 		|| !ft_strncmp(e[0], "L", 2))
-		return (validate_acl(e));
+		return (init_acl(e, p));
 	else if (!ft_strncmp(e[0], "pl", 3) || !ft_strncmp(e[0], "sp", 3)
 		|| !ft_strncmp(e[0], "cy", 3))
-		return (validate_obj(e));
-	else
-		return (ft_dprintf(2, "Error\nInvalid element identifier\n"), 1);
+		return (init_obj(e, p));
 	return (0);
 }
 
-static int	loop(int fd)
+static int	loop(int fd, t_rt *p)
 {
 	char	*line;
 	char	**element;
@@ -45,13 +43,13 @@ static int	loop(int fd)
 		free(line);
 		if (!element)
 			return (ft_dprintf(2, "ft_split fail\n"), 1);
-		if (validate_element(element))
+		if (init_element(element, p))
 			return (ft_free_array(element), 1);
 		ft_free_array(element);
 	}
 }
 
-int	validate_file(char *rt)
+int	init_file(char *rt, t_rt *p)
 {
 	int	fd;
 	int	status;
@@ -59,20 +57,8 @@ int	validate_file(char *rt)
 	fd = open(rt, O_RDONLY);
 	if (fd == -1)
 		return (perror("Error\n"), 1);
-	status = loop(fd);
+	status = loop(fd, p);
 	if (close(fd) == -1)
 		return (perror("Error\n"), 1);
 	return (status);
-}
-
-int	input_validation(char *arg)
-{
-	if (ft_strlen(arg) < 4
-		|| ft_strncmp(arg + ft_strlen(arg) - 3, ".rt", 4)
-		|| !ft_isalnum(*arg))
-		return (ft_dprintf(2, "Error: "
-				"Pls enter a .rt file starting with alphanumeric\n"), 1);
-	if (validate_file(arg))
-		return (1);
-	return (0);
 }

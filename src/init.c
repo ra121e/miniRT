@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/09 22:56:48 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/11 18:18:39 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	init_value(t_rt *p)
 	p->title = "miniRT";
 }
 
-int	init(t_rt *p)
+int	init(t_rt *p, char *rt)
 {
 	init_value(p);
+	init_file(rt, p);
 	p->mlx = mlx_init();
 	if (p->mlx == NULL)
 		return (1);
