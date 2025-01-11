@@ -6,12 +6,16 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/11 18:18:04 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/11 19:26:59 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -67,7 +71,6 @@ struct s_intersection
 };
 
 // color factor
-// rgb int not double
 struct s_fcolor
 {
 	int	r;
@@ -116,12 +119,13 @@ struct s_a_light
 
 struct s_camera
 {
-	t_vec3	pos;
+	t_vec3	position;
 	t_vec3	orientation;
 	double	fov;
+	double	distance;
 	t_vec3	x_basis;
 	t_vec3	y_basis;
-	t_vec3	d_venter;
+	t_vec3	d_center;
 	t_img	img;
 };
 
@@ -144,26 +148,33 @@ struct s_dlist
 
 typedef struct s_rt
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_size;
-	int			endian;
-	int			win_x;
-	int			win_y;
-	char		*title;
-	t_camera	c;
-	t_object	sp;
-	t_object	pl;
-	t_object	cy;
-	t_light		l;
-	t_a_light	a;
-//	t_dlist		*camera;
-//	t_list		*object;
-//	t_list		*light;
-}	t_rt;
+	void            *mlx;
+	void            *win;
+	void            *img;
+	char            *addr;
+	int                     bpp;
+	int                     line_size;
+	int                     endian;
+	int                     win_x;
+	int                     win_y;
+	double          sx;
+	double          sy;
+	t_vec3          ray_start;
+	t_vec3          ray_direction;
+	t_vec3          sp2c;
+	t_vec3          cy2c;
+	double          discriminant;
+	char            *title;
+	t_camera        c;
+	t_object        sp;
+	t_object        pl;
+	t_object        cy;
+	t_light         l;
+	t_a_light		a;
+	//      t_dlist         *camera;
+	//      t_list          *object;
+	//      t_list          *light;
+}   t_rt;
 
 // input validation
 
@@ -217,5 +228,9 @@ t_dlist	*dlst_new(void *content);
 t_dlist	*dlst_add_right(t_dlist **lst, t_dlist *new);
 
 int	raytracing(t_rt *p);
+
+// math utils
+
+double  deg2rad(double a);
 
 #endif
