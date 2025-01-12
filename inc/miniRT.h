@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/12 16:06:38 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/12 18:03:51 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ struct s_fcolor
 // constants(konstant) of material
 struct s_material
 {
-	t_fcolor	kdif;
-	t_fcolor	kspe;
+	double		kdif;
+	double		kspe;
 	float		shine;
 };
 
@@ -101,6 +101,9 @@ struct s_object
 	t_vec3			p1;
 	t_vec3			p2;
 	t_vec3			p3;
+	int				red;
+	int				green;
+	int				blue;
 };
 
 struct s_camera
@@ -119,7 +122,7 @@ struct s_camera
 struct s_light
 {
 	t_vec3		position;
-	t_fcolor	intensity;
+	double		intensity;
 };
 
 // data structure
@@ -152,6 +155,9 @@ typedef struct s_rt
 	double		solution;
 	t_vec3		pi;
 	t_vec3		ni;
+	double		r_a;
+	double		r_d;
+	double		r_s;
 	char		*title;
 	t_camera	c;
 	t_object	sp;

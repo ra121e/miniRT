@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 13:28:06 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/12 21:49:29 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_camera(t_rt *p)
 {
 	// these values will be from rt file
 	p->c.position = vec3_init(0, 0, 0);
-	p->c.orientation = vec3_init(0.1, 0, 1);
+	p->c.orientation = vec3_init(0, 0, 1);
 	p->c.fov = deg2rad(70);
 	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
 	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
@@ -50,6 +50,16 @@ void	init_sphere(t_rt *p)
 	p->sp.type = SPHERE;
 	p->sp.center = vec3_init(0, 0, 20.6);
 	p->sp.radius = 6.3;
+	p->sp.red = 255;
+	p->sp.green = 255;
+	p->sp.blue = 255;
+}
+
+void	init_light(t_rt *p)
+{
+	p->l.intensity = 0.9;
+	p->l.position = vec3_init(0, 20, -20);
+	p->r_a = 0.8;
 }
 
 int	init(t_rt *p)
@@ -58,6 +68,7 @@ int	init(t_rt *p)
 	init_value(p);
 	init_camera(p);
 	init_sphere(p);
+	init_light(p);
 	p->mlx = mlx_init();
 	if (p->mlx == NULL)
 		return (1);
