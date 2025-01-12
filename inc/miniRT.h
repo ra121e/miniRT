@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 12:52:50 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:06:38 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,9 @@ typedef struct s_rt
 	t_vec3		sp2c;
 	t_vec3		cy2c;
 	double		discriminant;
+	double		solution;
+	t_vec3		pi;
+	t_vec3		ni;
 	char		*title;
 	t_camera	c;
 	t_object	sp;

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/10 12:55:56 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:08:07 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	quadratic_formula(t_rt *p)
 	b = 2 * vec3_dot(p->sp2c, p->ray_direction);
 	c = vec3_dot(p->sp2c, p->sp2c) - p->sp.radius * p->sp.radius;
 	p->discriminant = b * b - 4 * a * c;
+	p->solution = (-b -sqrt(p->discriminant)) / (2 * a);
+	p->pi = vec3_add(p->ray_start, vec3_mult(p->ray_direction, p->solution))
+	p->ni = vec3_normalize(vec3_sub(p->pi, p->sp.center));
 }
 
 int	raytracing(t_rt *p)
