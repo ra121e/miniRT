@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/12 21:49:29 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 09:13:23 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_light(t_rt *p)
 {
 	p->l.intensity = 0.9;
 	p->l.position = vec3_init(0, 20, -20);
-	p->r_a = 0.8;
+	p->r_a = fcolor_mult_scalar(fcolor_init(255, 255, 255), 0.2);
 }
 
 int	init(t_rt *p)
