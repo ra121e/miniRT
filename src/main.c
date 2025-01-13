@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:31:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/09 22:27:19 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:18:36 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	main(int argc, char **argv)
 //	p->mlx = mlx_init();
 //	p->win = mlx_new_window(p->mlx, p->win_x, p->win_y, p->title);
 	printf("after initilize\n");
-	raytracing(p);
+	raytracing_pl(p);
+//	raytracing(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 //	render(p);
 	mlx_hook(p->win, DestroyNotify, NoEventMask, close_win, p);

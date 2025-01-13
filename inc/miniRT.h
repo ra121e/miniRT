@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 10:31:48 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:22:34 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,11 @@ typedef struct s_rt
 	t_vec3		ray_start;
 	t_vec3		ray_direction;
 	t_vec3		sp2c;
+	t_vec3		pl2c;
 	t_vec3		cy2c;
 	double		discriminant;
 	double		solution;
+	double		nearest;
 	t_vec3		pi;
 	t_vec3		ni;
 	t_fcolor	r_a;
@@ -199,7 +201,10 @@ t_dlist	*dlst_new(void *content);
 t_dlist	*dlst_add_right(t_dlist **lst, t_dlist *new);
 
 
-int	raytracing(t_rt *p);
+void	screen(t_rt *p, double x, double y);
+int		color(t_rt *p);
+int		raytracing(t_rt *p);
+int		raytracing_pl(t_rt *p);
 
 // math utils
 
