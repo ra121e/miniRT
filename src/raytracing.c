@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/13 11:53:30 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 12:10:52 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,16 @@ void	specular(t_rt *p)
 
 int	color(t_rt *p)
 {
-	int	red;
-	int	green;
-	int	blue;
-	int	rgb;
+	t_fcolor	r_all;
+	int			red;
+	int			green;
+	int			blue;
+	int			rgb;
 
-	red = (int)(255 * (p->r_a.red + p->r_d.red + p->r_s.red));
-	green = (int)(255 * (p->r_a.green + p->r_d.green + p->r_s.green));
-	blue = (int)(255 * (p->r_a.blue + p->r_d.blue + p->r_s.blue));
+	r_all = fcolor_add(fcolor_add(p->r_a, p->r_d), p->r_s);
+	red = (int)(255 * r_all.red);
+	green = (int)(255 * r_all.green);
+	blue = (int)(255 * r_all.blue);
 	rgb = (red << 16) + (green << 8) + (blue);
 	return (rgb);
 }
@@ -103,6 +105,7 @@ int	raytracing(t_rt *p)
 					continue ;
 				diffuse(p);
 				specular(p);
+
 				offset = y * p->line_size + (x * p->bpp / 8);
 				*(int *)(p->addr + offset) = color(p);
 			}
