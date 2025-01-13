@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/14 00:37:18 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/14 00:54:50 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	init_cylinder(t_rt *p)
 {
 	p->cy.type = CYLINDER;
 	p->cy.center = vec3_init(0, 0, 0);
-	p->cy.normal = vec3_init(0, 1, 0);
+	p->cy.normal = vec3_init(0, 1, 1);
 	p->cy.radius = 1;
-	p->cy.height = 1;
+	p->cy.height = 15;
 	p->cy.material.kdif = fcolor_rgb_convert(255, 0, 0);
 	p->cy.material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	p->cy.material.shine = 100;
