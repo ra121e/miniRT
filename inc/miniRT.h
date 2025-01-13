@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/12 18:03:51 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 10:31:48 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ struct s_fcolor
 // constants(konstant) of material
 struct s_material
 {
-	double		kdif;
-	double		kspe;
+	t_fcolor	kdif;
+	t_fcolor	kspe;
 	float		shine;
 };
 
@@ -101,9 +101,6 @@ struct s_object
 	t_vec3			p1;
 	t_vec3			p2;
 	t_vec3			p3;
-	int				red;
-	int				green;
-	int				blue;
 };
 
 struct s_camera
@@ -122,7 +119,7 @@ struct s_camera
 struct s_light
 {
 	t_vec3		position;
-	double		intensity;
+	t_fcolor	intensity;
 };
 
 // data structure
@@ -155,9 +152,9 @@ typedef struct s_rt
 	double		solution;
 	t_vec3		pi;
 	t_vec3		ni;
-	double		r_a;
-	double		r_d;
-	double		r_s;
+	t_fcolor	r_a;
+	t_fcolor	r_d;
+	t_fcolor	r_s;
 	char		*title;
 	t_camera	c;
 	t_object	sp;
@@ -185,6 +182,16 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
 double	vec3_mag(t_vec3 a);
 t_vec3	vec3_normalize(t_vec3 a);
 int		get_vec3_from_str(t_vec3 *vec, char *str);
+
+// fcolor utils
+
+t_fcolor	fcolor_normalize(t_fcolor fcolor);
+t_fcolor	fcolor_init(double red, double green, double blue);
+t_fcolor	fcolor_add(t_fcolor a, t_fcolor b);
+t_fcolor	fcolor_mult(t_fcolor a, t_fcolor b);
+t_fcolor	fcolor_mult_scalar(t_fcolor a, double b);
+t_fcolor	fcolor_rgb_convert(double r, double g, double b);
+
 
 // dlist
 

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/12 18:19:15 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 10:45:26 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	diffuse(t_rt *p)
 	dotproduct = vec3_dot(p->ni, l);
 	if (dotproduct < 0)
 		dotproduct = 0;
-	p->r_d = p->sp.material.kdif * p->l.intensity *dotproduct;
+	p->r_d = fcolor_mult_scalar(fcolor_mult(p->sp.material.kdif, p->l.intensity), dotproduct);
 }
 
 void	specular(t_rt *p)
@@ -64,9 +64,9 @@ void	specular(t_rt *p)
 	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
 	v = vec3_mult(p->ray_direction, -1);
 	r = vec3_sub(vec3_mult(vec3_mult(p->ni, vec3_dot(p->ni, l)), 2), l);
-	p->r_s = p->sp.material.kspe * p->l.intensity * pow(vec3_dot(v, r), p->sp.material.shine);
+	p->r_s = fcolor_mult_scalar(fcolor_mult(p->sp.material.kspe, p->l.intensity), pow(vec3_dot(v, r), p->sp.material.shine));
 	if (vec3_dot(v, r) < 0)
-		p->r_s = 0;
+		p->r_s = fcolor_init(0, 0, 0);
 }
 
 int	color(t_rt *p)
@@ -76,9 +76,9 @@ int	color(t_rt *p)
 	int	blue;
 	int	rgb;
 
-	red = (int)(255 * (p->r_d + p->r_s));
-	green = (int)(255 * (p->r_d + p->r_s));
-	blue = (int)(255 * (p->r_d + p->r_s));
+	red = (int)(255 * (p->r_a.red + p->r_d.red + p->r_s.red));
+	green = (int)(255 * (p->r_a.green + p->r_d.green + p->r_s.green));
+	blue = (int)(255 * (p->r_a.blue + p->r_d.blue + p->r_s.blue));
 	rgb = (red << 16) + (green << 8) + (blue);
 	return (rgb);
 }
@@ -109,7 +109,7 @@ int	raytracing(t_rt *p)
 			else
 			{
 				offset = y * p->line_size + (x * p->bpp / 8);
-				*(int *)(p->addr + offset) = (128 << 24) | 0x00FF0000;
+				*(int *)(p->addr + offset) = (128 << 24) | 0x00FFFFFF;
 			}
 		}
 	}

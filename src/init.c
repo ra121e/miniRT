@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 09:13:23 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 10:39:02 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,19 @@ void	init_sphere(t_rt *p)
 	p->sp.type = SPHERE;
 	p->sp.center = vec3_init(0, 0, 20.6);
 	p->sp.radius = 6.3;
-	p->sp.red = 255;
-	p->sp.green = 255;
-	p->sp.blue = 255;
+	p->sp.material.kdif = fcolor_rgb_convert(255, 0, 0);
+	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
+	p->sp.material.shine = 20;
 }
 
 void	init_light(t_rt *p)
 {
-	p->l.intensity = 0.9;
-	p->l.position = vec3_init(0, 20, -20);
+	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255,255), 0.6);
+	p->l.position = vec3_init(-20, 20, -20);
+}
+
+void	init_ambient(t_rt *p)
+{
 	p->r_a = fcolor_mult_scalar(fcolor_init(255, 255, 255), 0.2);
 }
 
@@ -68,6 +72,7 @@ int	init(t_rt *p)
 	init_value(p);
 	init_camera(p);
 	init_sphere(p);
+	init_ambient(p);
 	init_light(p);
 	p->mlx = mlx_init();
 	if (p->mlx == NULL)

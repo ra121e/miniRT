@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 22:29:26 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/13 09:11:07 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 10:19:39 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,9 @@ t_fcolor	fcolor_mult_scalar(t_fcolor a, double b)
 	a.green = a.green * b;
 	a.blue = a.blue * b;
 	return (fcolor_normalize(a));
+}
+
+t_fcolor	fcolor_rgb_convert(double r, double g, double b)
+{
+	return (fcolor_normalize(fcolor_init(r / 255, g / 255, b / 255)));
 }
