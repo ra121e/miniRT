@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/13 16:21:09 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/14 00:38:24 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ int	raytracing(t_rt *p)
 			}
 			else
 			{
-//				offset = y * p->line_size + (x * p->bpp / 8);
-//				*(int *)(p->addr + offset) = (128 << 24) | 0x00FFFFFF;
+				offset = y * p->line_size + (x * p->bpp / 8);
+				*(int *)(p->addr + offset) = (128 << 24) | 0x00FFFFFF;
 			}
 		}
 	}

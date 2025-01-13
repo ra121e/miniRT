@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 17:10:03 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/14 00:37:18 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,25 @@ void	init_plane(t_rt *p)
 	p->pl.normal = vec3_init(0, 1, -0.1);
 	p->pl.material.kdif = fcolor_rgb_convert(119, 223, 109);
 	p->pl.material.kspe = fcolor_init(1.0, 1.0, 1.0);
-	p->pl.material.shine = 120;
+	p->pl.material.shine = 100;
+}
+
+void	init_cylinder(t_rt *p)
+{
+	p->cy.type = CYLINDER;
+	p->cy.center = vec3_init(0, 0, 0);
+	p->cy.normal = vec3_init(0, 1, 0);
+	p->cy.radius = 1;
+	p->cy.height = 1;
+	p->cy.material.kdif = fcolor_rgb_convert(255, 0, 0);
+	p->cy.material.kspe = fcolor_init(0.9, 0.9, 0.9);
+	p->cy.material.shine = 100;
 }
 
 void	init_light(t_rt *p)
 {
-	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.8);
-	p->l.position = vec3_init(-100, 30, -50);
+	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.7);
+	p->l.position = vec3_init(-30, 30, -30);
 }
 
 void	init_ambient(t_rt *p)
@@ -91,6 +103,7 @@ int	init(t_rt *p)
 	init_camera(p);
 	init_sphere(p);
 	init_plane(p);
+	init_cylinder(p);
 	init_ambient(p);
 	init_light(p);
 	p->mlx = mlx_init();

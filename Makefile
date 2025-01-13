@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/13 15:19:28 by athonda          ###   ########.fr        #
+#    Updated: 2025/01/13 23:38:31 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_F := main.c \
 		 dlist.c \
 		 raytracing.c \
 		 raytracing_pl.c \
+		 raytracing_cy.c \
 		 fcolor.c \
 		 utils.c
 

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 15:45:26 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 23:38:07 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void	screen(t_rt *p, double x, double y);
 int		color(t_rt *p);
 int		raytracing(t_rt *p);
 int		raytracing_pl(t_rt *p);
+int		raytracing_cy(t_rt *p);
 
 // math utils
 
