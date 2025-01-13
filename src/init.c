@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 16:51:37 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:10:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init_camera(t_rt *p)
 {
 	// these values will be from rt file
 	p->c.position = vec3_init(0, 2, -5);
-	p->c.orientation = vec3_init(0, -0.1, 1);
+	p->c.orientation = vec3_init(0, -0.02, 1);
 	p->c.fov = deg2rad(70);
 	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
 	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
@@ -60,7 +60,7 @@ void	init_sphere(t_rt *p)
 	p->sp.radius = 3.3;
 	p->sp.material.kdif = fcolor_rgb_convert(0, 0, 255);
 	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
-	p->sp.material.shine = 100;
+	p->sp.material.shine = 80;
 }
 
 void	init_plane(t_rt *p)
@@ -68,15 +68,15 @@ void	init_plane(t_rt *p)
 	p->pl.type = PLANE;
 	p->pl.center = vec3_init(0, 0, 0);
 	p->pl.normal = vec3_init(0, 1, -0.1);
-	p->pl.material.kdif = fcolor_rgb_convert(255, 255, 255);
-	p->pl.material.kspe = fcolor_init(0.9, 0.9, 0.9);
-	p->pl.material.shine = 80;
+	p->pl.material.kdif = fcolor_rgb_convert(119, 223, 109);
+	p->pl.material.kspe = fcolor_init(1.0, 1.0, 1.0);
+	p->pl.material.shine = 120;
 }
 
 void	init_light(t_rt *p)
 {
-	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.7);
-	p->l.position = vec3_init(-40, 20, -50);
+	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.8);
+	p->l.position = vec3_init(-100, 30, -50);
 }
 
 void	init_ambient(t_rt *p)
