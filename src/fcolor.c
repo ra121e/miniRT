@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 22:29:26 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/13 10:19:39 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 11:47:41 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_fcolor	fcolor_normalize(t_fcolor fcolor)
 		fcolor.red = 1.0;
 	if (fcolor.green > 1.0)
 		fcolor.green = 1.0;
-	if (fcolor.blue < 1.0)
+	if (fcolor.blue > 1.0)
 		fcolor.blue = 1.0;
 	return (fcolor);
 }
