@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 15:22:34 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 15:45:26 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ typedef struct s_rt
 	t_vec3		cy2c;
 	double		discriminant;
 	double		solution;
-	double		nearest;
+	double		nearest[800][800];
 	t_vec3		pi;
 	t_vec3		ni;
 	t_fcolor	r_a;

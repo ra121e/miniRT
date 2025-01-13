@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 15:31:06 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:34:24 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 //
 void	init_value(t_rt *p)
 {
+	int	i;
+	int	j;
+
 	p->mlx = NULL;
 	p->win = NULL;
 	p->img = NULL;
@@ -28,13 +31,18 @@ void	init_value(t_rt *p)
 	p->win_x = 800;
 	p->win_y = 800;
 	p->title = "miniRT";
+	i = -1;
+	j = -1;
+	while (++i < 800)
+		while (++j < 800)
+			p->nearest[i][j] = INFINITY;
 }
 
 void	init_camera(t_rt *p)
 {
 	// these values will be from rt file
-	p->c.position = vec3_init(0, 0, 0);
-	p->c.orientation = vec3_init(0, 0, 1);
+	p->c.position = vec3_init(0, 3, -5);
+	p->c.orientation = vec3_init(0, -0.2, 1);
 	p->c.fov = deg2rad(70);
 	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
 	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
@@ -48,8 +56,8 @@ void	init_camera(t_rt *p)
 void	init_sphere(t_rt *p)
 {
 	p->sp.type = SPHERE;
-	p->sp.center = vec3_init(0, 0, 20.6);
-	p->sp.radius = 6.3;
+	p->sp.center = vec3_init(0, 0, 5);
+	p->sp.radius = 3.3;
 	p->sp.material.kdif = fcolor_rgb_convert(255, 255, 255);
 	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	p->sp.material.shine = 30;
@@ -58,8 +66,8 @@ void	init_sphere(t_rt *p)
 void	init_plane(t_rt *p)
 {
 	p->pl.type = PLANE;
-	p->pl.center = vec3_init(0, 0, -10);
-	p->pl.normal = vec3_init(0, 1, 0);
+	p->pl.center = vec3_init(0, 0, 0);
+	p->pl.normal = vec3_init(0, 1, -0.1);
 	p->pl.material.kdif = fcolor_rgb_convert(255, 255, 255);
 	p->pl.material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	p->pl.material.shine = 80;
@@ -68,7 +76,7 @@ void	init_plane(t_rt *p)
 void	init_light(t_rt *p)
 {
 	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.7);
-	p->l.position = vec3_init(0, 20, 50);
+	p->l.position = vec3_init(-20, 20, -50);
 }
 
 void	init_ambient(t_rt *p)

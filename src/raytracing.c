@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/13 12:10:52 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:21:09 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	color(t_rt *p)
 
 int	raytracing(t_rt *p)
 {
-	double	x;
-	double	y;
-	int		offset;
+	int	x;
+	int	y;
+	int	offset;
 
 	x = -1;
 	while (++x < p->win_x)
@@ -101,18 +101,20 @@ int	raytracing(t_rt *p)
 			quadratic_formula(p);
 			if (p->discriminant >= 0)
 			{
-				if (p->solution < 0)
+				if (p->solution < 0 || \
+					(p->nearest[x][y] > 0 && p->solution > 0 && \
+					p->nearest[x][y] < p->solution))
 					continue ;
+				p->nearest[x][y] = p->solution;
 				diffuse(p);
 				specular(p);
-
 				offset = y * p->line_size + (x * p->bpp / 8);
 				*(int *)(p->addr + offset) = color(p);
 			}
 			else
 			{
-				offset = y * p->line_size + (x * p->bpp / 8);
-				*(int *)(p->addr + offset) = (128 << 24) | 0x00FFFFFF;
+//				offset = y * p->line_size + (x * p->bpp / 8);
+//				*(int *)(p->addr + offset) = (128 << 24) | 0x00FFFFFF;
 			}
 		}
 	}

@@ -6,13 +6,13 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/13 15:23:41 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:21:35 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	liner_equation(t_rt *p)
+void	liner_equation(t_rt *p, int x, int y)
 {
 	double	denominator;
 	double	numerator;
@@ -21,6 +21,7 @@ void	liner_equation(t_rt *p)
 	denominator = vec3_dot(vec3_mult(p->ray_direction, -1), p->pl.normal);
 	numerator = vec3_dot(p->pl2c, p->pl.normal);
 	p->solution = numerator / denominator;
+	p->nearest[x][y] = p->solution;
 	p->pi = vec3_add(p->ray_start, vec3_mult(p->ray_direction, p->solution));
 	if (denominator > 0)
 		p->ni = p->pl.normal;
@@ -56,9 +57,9 @@ void	specular_pl(t_rt *p)
 
 int	raytracing_pl(t_rt *p)
 {
-	double	x;
-	double	y;
-	int		offset;
+	int	x;
+	int	y;
+	int	offset;
 
 	x = -1;
 	while (++x < p->win_x)
@@ -67,7 +68,7 @@ int	raytracing_pl(t_rt *p)
 		while (++y < p->win_y)
 		{
 			screen(p, x, y);
-			liner_equation(p);
+			liner_equation(p, x, y);
 			if (p->discriminant >= 0)
 			{
 				if (p->solution < 0)
