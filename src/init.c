@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/14 01:15:56 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/14 15:18:11 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,15 @@ void	init_value(t_rt *p)
 	p->win_y = 800;
 	p->title = "miniRT";
 	i = -1;
-	j = -1;
 	while (++i < 800)
+	{
+		j= -1;
 		while (++j < 800)
+		{
 			p->nearest[i][j] = INFINITY;
+			p->nearest_object[i][j] = NONE;
+		}
+	}
 }
 
 void	init_camera(t_rt *p)
@@ -66,9 +71,9 @@ void	init_sphere(t_rt *p)
 void	init_plane(t_rt *p)
 {
 	p->pl.type = PLANE;
-	p->pl.center = vec3_init(0, 0, 0);
-	p->pl.normal = vec3_normalize(vec3_init(0, 1, -0.1));
-	p->pl.material.kdif = fcolor_rgb_convert(119, 223, 109);
+	p->pl.center = vec3_init(0, -2, 0);
+	p->pl.normal = vec3_normalize(vec3_init(0, 1, 0));
+	p->pl.material.kdif = fcolor_rgb_convert(0, 255, 0);
 	p->pl.material.kspe = fcolor_init(1.0, 1.0, 1.0);
 	p->pl.material.shine = 100;
 }

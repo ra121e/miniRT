@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/13 23:38:07 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/14 15:08:49 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
-
+# define SHINE 100
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -38,6 +38,7 @@ typedef struct s_object			t_object;
 typedef struct s_camera			t_camera;
 typedef struct s_material		t_material;
 typedef struct s_light			t_light;
+typedef	enum e_shape			t_shape;
 
 // math
 // vector
@@ -82,6 +83,7 @@ struct s_material
 
 enum	e_shape
 {
+	NONE,
 	PLANE,
 	SPHERE,
 	SQUARE,
@@ -152,6 +154,7 @@ typedef struct s_rt
 	double		discriminant;
 	double		solution;
 	double		nearest[800][800];
+	t_shape		nearest_object[800][800];
 	t_vec3		pi;
 	t_vec3		ni;
 	t_fcolor	r_a;

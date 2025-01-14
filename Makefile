@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/13 23:38:31 by athonda          ###   ########.fr        #
+#    Updated: 2025/01/14 12:54:57 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLX_DIR := mlx
 MLX_LIB := $(MLX_DIR)/libmlx.a
 
 CC := cc
-CFLAGS := -O3 -g -Wall -Werror -Wextra
+CFLAGS := -g -Wall -Werror -Wextra
 INC := inc/miniRT.h
 INC_FLAG := -Iinc -I$(LIB_DIR)/inc -I$(MLX_DIR)
 LINK := -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
