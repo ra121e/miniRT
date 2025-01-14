@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/14 15:22:58 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/14 17:28:14 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void	diffuse(t_rt *p, int x, int y)
 		kdif = p->sp.material.kdif;
 	else if (p->nearest_object[x][y] == CYLINDER)
 		kdif = p->cy.material.kdif;
+	else
+		return ;
 	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
 	dotproduct = vec3_dot(p->ni, l);
 	if (dotproduct < 0)
@@ -162,6 +164,8 @@ void	specular(t_rt *p, int x, int y)
 		kspe = p->sp.material.kspe;
 	else if (p->nearest_object[x][y] == CYLINDER)
 		kspe = p->cy.material.kspe;
+	else
+		return ;
 	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
 	v = vec3_mult(p->ray_direction, -1);
 	r = vec3_sub(vec3_mult(vec3_mult(p->ni, vec3_dot(p->ni, l)), 2), l);
