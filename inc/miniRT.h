@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 11:58:10 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:45:28 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,17 @@ typedef struct s_object			t_object;
 typedef struct s_camera			t_camera;
 typedef struct s_material		t_material;
 typedef struct s_light			t_light;
-typedef	enum e_shape			t_shape;
+
+enum e_shape
+{
+	NONE,
+	PLANE,
+	SPHERE,
+	SQUARE,
+	CYLINDER,
+	TRIANGLE
+};
+typedef enum e_shape			t_shape;
 
 // math
 // vector
@@ -64,6 +74,7 @@ struct s_intersection
 	double	solution;
 	t_vec3	position;
 	t_vec3	normal;
+	t_shape	type;
 };
 
 // color factor
@@ -82,15 +93,6 @@ struct s_material
 	float		shine;
 };
 
-enum	e_shape
-{
-	NONE,
-	PLANE,
-	SPHERE,
-	SQUARE,
-	CYLINDER,
-	TRIANGLE
-};
 
 struct s_object
 {

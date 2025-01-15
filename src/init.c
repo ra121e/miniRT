@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 12:24:40 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:47:22 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_camera(t_rt *p)
 void	init_sphere(t_rt *p)
 {
 	p->sp.type = SPHERE;
-	p->sp.center = vec3_init(0, 1, 3);
+	p->sp.center = vec3_init(0, -2, 3);
 	p->sp.radius = 2;
 	p->sp.material.kdif = fcolor_rgb_convert(0, 0, 255);
 	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);

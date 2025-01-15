@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/15 12:21:43 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:37:40 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,41 @@ void	screen(t_rt *p, double x, double y)
 	p->ray_start = p->c.position;
 }
 
-void	liner_equation(t_rt *p, int x, int y)
+t_intersection	liner_equation(t_rt *p)
 {
 	double	denominator;
 	double	numerator;
+	t_intersection	tmp;
 
 	p->pl2c = vec3_sub(p->c.position, p->pl.center);
 	denominator = vec3_dot(vec3_mult(p->ray_direction, -1), p->pl.normal);
 	numerator = vec3_dot(p->pl2c, p->pl.normal);
-	p->solution = numerator / denominator;
-	if (p->solution >= 0 && \
-		(p->nearest[x][y] > 0 && p->solution < p->nearest[x][y]))
+	if (denominator == 0)
 	{
-		p->nearest[x][y] = p->solution;
-		p->nearest_object[x][y] = PLANE;
-		p->pi = vec3_add(p->ray_start, vec3_mult(p->ray_direction, p->solution));
-		if (denominator > 0)
-			p->ni = p->pl.normal;
-		else
-			p->ni = vec3_mult(p->pl.normal, -1);
+		tmp.yes_intersection = false;
+		return (tmp);
 	}
+	tmp.yes_intersection = true;
+	tmp.solution = numerator / denominator;
+	tmp.position = vec3_add(p->ray_start, vec3_mult(p->ray_direction, tmp.solution));
+	if (denominator > 0)
+		tmp.normal = p->pl.normal;
+	else
+		tmp.normal = vec3_mult(p->pl.normal, -1);
+	tmp.type = PLANE;
+	return (tmp);
+//	p->solution = numerator / denominator;
+//	if (p->solution >= 0 &&
+//		(p->nearest[x][y] > 0 && p->solution < p->nearest[x][y]))
+//	{
+//		p->nearest[x][y] = p->solution;
+//		p->nearest_object[x][y] = PLANE;
+//		p->pi = vec3_add(p->ray_start, vec3_mult(p->ray_direction, p->solution));
+//		if (denominator > 0)
+//			p->ni = p->pl.normal;
+//		else
+//			p->ni = vec3_mult(p->pl.normal, -1);
+//	}
 }
 
 void	cylinder_intersection(t_rt *p, double t1, double t2)
@@ -126,6 +141,7 @@ t_intersection	quadratic_formula(t_rt *p)
 	tmp.solution = (-b -sqrt(p->discriminant)) / (2 * a);
 	tmp.position = vec3_add(p->ray_start, vec3_mult(p->ray_direction, tmp.solution));
 	tmp.normal = vec3_normalize(vec3_sub(tmp.position, p->sp.center));
+	tmp.type = SPHERE;
 	return (tmp);
 //	p->solution = (-b -sqrt(p->discriminant)) / (2 * a);
 //	if (p->discriminant >= 0 &&
@@ -142,7 +158,7 @@ t_intersection	quadratic_formula(t_rt *p)
 void	intersection(t_rt *p, int x, int y)
 {
 	t_intersection	tmp;
-
+	int	i;
 //	tmp = liner_equation;
 //	if (tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
 //	{
@@ -151,13 +167,22 @@ void	intersection(t_rt *p, int x, int y)
 //		p->pi = tmp.position;
 //		p->ni = tmp.normal;
 //	}
-	tmp = quadratic_formula(p);
-	if (tmp.yes_intersection && tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
+	i = 0;
+	while (++i < 3)
 	{
-		p->nearest_object[x][y] = SPHERE;
-		p->nearest[x][y] = tmp.solution;
-		p->pi = tmp.position;
-		p->ni = tmp.normal;
+		if (i == 1)
+			tmp = quadratic_formula(p);
+		else if (i == 2)
+			tmp = liner_equation(p);
+//		else if (i == 3)
+//			tmp = cylinder_formula(p);
+		if (tmp.yes_intersection && tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
+		{
+			p->nearest_object[x][y] = tmp.type;
+			p->nearest[x][y] = tmp.solution;
+			p->pi = tmp.position;
+			p->ni = tmp.normal;
+		}
 	}
 //	tmp = cylinder_formula;
 //	if (tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
@@ -285,8 +310,8 @@ int	raytracing(t_rt *p)
 		while (++y < p->win_y)
 		{
 			screen(p, x, y);
-			liner_equation(p, x, y);
-			cylinder_formula(p, x, y);
+//			liner_equation(p, x, y);
+//			cylinder_formula(p, x, y);
 			intersection(p, x, y);
 //			quadratic_formula(p, x, y);
 			diffuse(p, x, y);
