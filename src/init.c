@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 18:45:19 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 20:17:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_camera(t_rt *p)
 void	init_sphere(t_rt *p)
 {
 	p->sp.type = SPHERE;
-	p->sp.center = vec3_init(0, 2, 3);
+	p->sp.center = vec3_init(0, 1, 3);
 	p->sp.radius = 2;
 	p->sp.material.kdif = fcolor_rgb_convert(0, 0, 255);
 	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
@@ -81,8 +81,8 @@ void	init_plane(t_rt *p)
 void	init_cylinder(t_rt *p)
 {
 	p->cy.type = CYLINDER;
-	p->cy.center = vec3_init(2, 0, 0);
-	p->cy.normal = vec3_normalize(vec3_init(-1, 1, 1));
+	p->cy.center = vec3_init(-2, 1, 0);
+	p->cy.normal = vec3_normalize(vec3_init(0, 1, 1));
 	p->cy.radius = 0.3;
 	p->cy.height = 10;
 	p->cy.material.kdif = fcolor_rgb_convert(255, 0, 0);
