@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 17:45:28 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 21:37:38 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 # define SHINE 100
 # define DELTA 1.0 / 512
+
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -30,12 +31,17 @@
 # include "libft.h"
 # include "mlx_int.h"
 
+// x,y,z coordinates limits in input validation
+# define XYZ_MIN -400
+# define XYZ_MAX 400
+
 typedef struct s_vec3			t_vec3;
 typedef struct s_dlist			t_dlist;
 typedef struct s_ray			t_ray;
 typedef struct s_intersection	t_intersection;
 typedef struct s_fcolor			t_fcolor;
 typedef struct s_object			t_object;
+typedef struct s_a_light		t_a_light;
 typedef struct s_camera			t_camera;
 typedef struct s_material		t_material;
 typedef struct s_light			t_light;
@@ -83,6 +89,9 @@ struct s_fcolor
 	double	red;
 	double	green;
 	double	blue;
+//	int	r;
+//	int	g;
+//	int	b;
 };
 
 // constants(konstant) of material
@@ -101,11 +110,19 @@ struct s_object
 	t_vec3			normal;
 	double			radius;
 	double			side_size;
+	double			diameter;
 	double			height;
 	t_material		material;
 	t_vec3			p1;
 	t_vec3			p2;
 	t_vec3			p3;
+};
+
+// Ambient lighting
+struct s_a_light
+{
+	double		intensity;
+	t_fcolor	color;
 };
 
 struct s_camera
@@ -124,11 +141,12 @@ struct s_camera
 struct s_light
 {
 	t_vec3		position;
+//	double		intensity;//shouldn't intensity be double instead of fcolor?
 	t_fcolor	intensity;
+	t_fcolor	color;
 };
 
 // data structure
-
 struct s_dlist
 {
 	void	*content;
@@ -173,18 +191,44 @@ typedef struct s_rt
 	t_object	pl;
 	t_object	cy;
 	t_light		l;
-	t_fcolor	a;
-//	t_dlist		*camera;
-//	t_list		*object;
-//	t_list		*light;
+//	t_fcolor	a;
+	t_a_light	a;
 }	t_rt;
 
-int		init(t_rt *p);
+// input validation
+int		input_validation(char *arg);
+int		validate_acl(char **e);
+int		validate_obj(char **e);
+
+// input validation utils
+int		validate_rgb(char *str);
+int		validate_vec3(char *str, double min, double max);
+
+// init
+int		init(t_rt *p, char *rt);
+int		init_file(char *rt, t_rt *p);
+int		init_acl(char **e, t_rt *p);
+int		init_obj(char **e, t_rt *p);
+
+// init utils
+int		init_rgb(char *str, t_fcolor *p);
+int		init_vec3(char *str, t_vec3 *p);
+
+// general
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
+void	screen(t_rt *p, double x, double y);
+int		color(t_rt *p);
+int		raytracing(t_rt *p);
+int		raytracing_pl(t_rt *p);
+int		raytracing_cy(t_rt *p);
+
+// general utils
+int		is_int(char *str);
+int		is_double(char *str);
+double	ft_atof(char *str);
 
 // vector utils
-
 t_vec3	vec3_init(double x, double y, double z);
 t_vec3	vec3_add(t_vec3 a, t_vec3 b);
 t_vec3	vec3_sub(t_vec3 a, t_vec3 b);
@@ -196,7 +240,6 @@ t_vec3	vec3_normalize(t_vec3 a);
 int		get_vec3_from_str(t_vec3 *vec, char *str);
 
 // fcolor utils
-
 t_fcolor	fcolor_normalize(t_fcolor fcolor);
 t_fcolor	fcolor_init(double red, double green, double blue);
 t_fcolor	fcolor_add(t_fcolor a, t_fcolor b);
@@ -204,21 +247,11 @@ t_fcolor	fcolor_mult(t_fcolor a, t_fcolor b);
 t_fcolor	fcolor_mult_scalar(t_fcolor a, double b);
 t_fcolor	fcolor_rgb_convert(double r, double g, double b);
 
-
 // dlist
-
 t_dlist	*dlst_new(void *content);
 t_dlist	*dlst_add_right(t_dlist **lst, t_dlist *new);
 
-
-void	screen(t_rt *p, double x, double y);
-int		color(t_rt *p);
-int		raytracing(t_rt *p);
-int		raytracing_pl(t_rt *p);
-int		raytracing_cy(t_rt *p);
-
 // math utils
-
 double	deg2rad(double a);
 
 #endif

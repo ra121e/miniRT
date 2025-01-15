@@ -6,16 +6,12 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 20:17:03 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 22:36:43 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//void	matrix_projection()
-//{
-//}
-//
 void	init_value(t_rt *p)
 {
 	int	i;
@@ -43,74 +39,74 @@ void	init_value(t_rt *p)
 	}
 }
 
-void	init_camera(t_rt *p)
-{
-	// these values will be from rt file
-	p->c.position = vec3_init(0, 3, -5);
-	p->c.orientation = vec3_init(0, -0.3, 1);
-	p->c.fov = deg2rad(70);
-	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
-	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
+//void	init_camera(t_rt *p)
+//{
+//	// these values will be from rt file
+//	p->c.position = vec3_init(0, 3, -5);
+//	p->c.orientation = vec3_init(0, -0.3, 1);
+//	p->c.fov = deg2rad(70);
+//	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
+//	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
+//
+//	p->c.x_basis.x = p->c.d_center.z / sqrt(p->c.d_center.z * p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
+//	p->c.x_basis.y = 0;
+//	p->c.x_basis.z = -p->c.d_center.x / sqrt(p->c.d_center.z * p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
+//	p->c.y_basis = vec3_normalize(vec3_cross(p->c.x_basis, vec3_mult(p->c.d_center, -1)));
+//}
+//
+//void	init_sphere(t_rt *p)
+//{
+//	p->sp.type = SPHERE;
+//	p->sp.center = vec3_init(0, 1, 3);
+//	p->sp.radius = 2;
+//	p->sp.material.kdif = fcolor_rgb_convert(0, 0, 255);
+//	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
+//	p->sp.material.shine = 80;
+//}
+//
+//void	init_plane(t_rt *p)
+//{
+//	p->pl.type = PLANE;
+//	p->pl.center = vec3_init(0, -2, 0);
+//	p->pl.normal = vec3_normalize(vec3_init(0, 1, 0));
+//	p->pl.material.kdif = fcolor_rgb_convert(0, 255, 0);
+//	p->pl.material.kspe = fcolor_init(1.0, 1.0, 1.0);
+//	p->pl.material.shine = 100;
+//}
+//
+//void	init_cylinder(t_rt *p)
+//{
+//	p->cy.type = CYLINDER;
+//	p->cy.center = vec3_init(-2, 1, 0);
+//	p->cy.normal = vec3_normalize(vec3_init(0, 1, 1));
+//	p->cy.radius = 0.3;
+//	p->cy.height = 10;
+//	p->cy.material.kdif = fcolor_rgb_convert(255, 0, 0);
+//	p->cy.material.kspe = fcolor_init(0.9, 0.9, 0.9);
+//	p->cy.material.shine = 100;
+//}
+//
+//void	init_light(t_rt *p)
+//{
+//	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.7);
+//	p->l.position = vec3_init(-50, 50, -50);
+//}
+//
+//void	init_ambient(t_rt *p)
+//{
+//	p->r_a = fcolor_mult_scalar(fcolor_init(255, 255, 255), 0.2);
+//}
 
-	p->c.x_basis.x = p->c.d_center.z / sqrt(p->c.d_center.z * p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
-	p->c.x_basis.y = 0;
-	p->c.x_basis.z = -p->c.d_center.x / sqrt(p->c.d_center.z * p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
-	p->c.y_basis = vec3_normalize(vec3_cross(p->c.x_basis, vec3_mult(p->c.d_center, -1)));
-}
-
-void	init_sphere(t_rt *p)
+int	init(t_rt *p, char *rt)
 {
-	p->sp.type = SPHERE;
-	p->sp.center = vec3_init(0, 1, 3);
-	p->sp.radius = 2;
-	p->sp.material.kdif = fcolor_rgb_convert(0, 0, 255);
-	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
-	p->sp.material.shine = 80;
-}
-
-void	init_plane(t_rt *p)
-{
-	p->pl.type = PLANE;
-	p->pl.center = vec3_init(0, -2, 0);
-	p->pl.normal = vec3_normalize(vec3_init(0, 1, 0));
-	p->pl.material.kdif = fcolor_rgb_convert(0, 255, 0);
-	p->pl.material.kspe = fcolor_init(1.0, 1.0, 1.0);
-	p->pl.material.shine = 100;
-}
-
-void	init_cylinder(t_rt *p)
-{
-	p->cy.type = CYLINDER;
-	p->cy.center = vec3_init(-2, 1, 0);
-	p->cy.normal = vec3_normalize(vec3_init(0, 1, 1));
-	p->cy.radius = 0.3;
-	p->cy.height = 10;
-	p->cy.material.kdif = fcolor_rgb_convert(255, 0, 0);
-	p->cy.material.kspe = fcolor_init(0.9, 0.9, 0.9);
-	p->cy.material.shine = 100;
-}
-
-void	init_light(t_rt *p)
-{
-	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.7);
-	p->l.position = vec3_init(-50, 50, -50);
-}
-
-void	init_ambient(t_rt *p)
-{
-	p->r_a = fcolor_mult_scalar(fcolor_init(255, 255, 255), 0.2);
-}
-
-int	init(t_rt *p)
-{
-//	matrix_projection();
 	init_value(p);
-	init_camera(p);
-	init_sphere(p);
-	init_plane(p);
-	init_cylinder(p);
-	init_ambient(p);
-	init_light(p);
+	init_file(rt, p);
+//	init_camera(p);
+//	init_sphere(p);
+//	init_plane(p);
+//	init_cylinder(p);
+//	init_ambient(p);
+//	init_light(p);
 	p->mlx = mlx_init();
 	if (p->mlx == NULL)
 		return (1);

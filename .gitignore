@@ -1,5 +1,8 @@
-obj
+.gitignore
+obj/
 *.o
 libft/*.a
 miniRT
 mlx/
+*.pdf
+*.swp

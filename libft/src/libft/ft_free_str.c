@@ -6,13 +6,13 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 15:15:20 by xlok              #+#    #+#             */
-/*   Updated: 2024/12/26 15:15:43 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/09 21:03:49 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_str(char *str)
+void	ft_free_str(char *str)
 {
 	free(str);
 	str = 0;
