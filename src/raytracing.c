@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/15 17:37:40 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 18:43:36 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_intersection	liner_equation(t_rt *p)
 //	}
 }
 
-void	cylinder_intersection(t_rt *p, double t1, double t2)
+void	cylinder_intersection(t_rt *p, double t1, double t2, t_intersection *tmp)
 {
 	t_vec3	p1;
 	t_vec3	p2;
@@ -77,29 +77,27 @@ void	cylinder_intersection(t_rt *p, double t1, double t2)
 	height_t2 = vec3_dot(vec3_sub(p2, p->cy.center), p->cy.normal);
 	if (height_t1 >= 0 && (height_t1 <= p->cy.height))
 	{
-		p->solution = t1;
-		p->pi = p1;
-		p->ni = vec3_normalize(vec3_sub(vec3_sub(p1, p->cy.center), vec3_mult(p->cy.normal, height_t1)));
+		tmp->yes_intersection = true;
+		tmp->solution = t1;
+		tmp->position = p1;
+		tmp->normal = vec3_normalize(vec3_sub(vec3_sub(p1, p->cy.center), vec3_mult(p->cy.normal, height_t1)));
 	}
 	else if (height_t2 >= 0 && (height_t2 <= p->cy.height))
 	{
-		p->solution = t2;
-		p->pi = p2;
-		p->ni = vec3_normalize(vec3_sub(vec3_mult(p->cy.normal, height_t2), vec3_sub(p2, p->cy.center)));
+		tmp->yes_intersection = true;
+		tmp->solution = t2;
+		tmp->position = p2;
+		tmp->normal = vec3_normalize(vec3_sub(vec3_mult(p->cy.normal, height_t2), vec3_sub(p2, p->cy.center)));
 	}
 	else
-	{
-		p->solution = -1;
-	}
+		tmp->yes_intersection = false;
 }
 
-void	cylinder_formula(t_rt *p, int x, int y)
+void	find_solution(t_rt *p, double *d, double *t1, double *t2)
 {
 	double	a;
 	double	b;
 	double	c;
-	double	t1;
-	double	t2;
 
 	p->cy2c = vec3_sub(p->c.position, p->cy.center);
 	a = vec3_mag(vec3_cross(p->ray_direction, p->cy.normal));
@@ -107,17 +105,34 @@ void	cylinder_formula(t_rt *p, int x, int y)
 	b = 2 * vec3_dot(vec3_cross(p->ray_direction, p->cy.normal), vec3_cross(vec3_sub(p->ray_start, p->cy.center), p->cy.normal));
 	c = vec3_mag(vec3_cross(vec3_sub(p->ray_start, p->cy.center), p->cy.normal));
 	c = c * c - p->cy.radius * p->cy.radius;
-	p->discriminant = b * b - 4 * a * c;
-	t1 = (-b - sqrt(p->discriminant)) / ( 2 * a);
-	t2 = (-b + sqrt(p->discriminant)) / ( 2 * a);
-	cylinder_intersection(p, t1, t2);
-	if (p->discriminant >= 0 && \
-		(p->nearest[x][y] > 0 && p->solution > 0 && \
-		p->solution < p->nearest[x][y]))
+	*d = b * b - 4 * a * c;
+	*t1 = (-b - sqrt(*d)) / ( 2 * a);
+	*t2 = (-b + sqrt(*d)) / ( 2 * a);
+}
+
+t_intersection	cylinder_formula(t_rt *p)
+{
+	double	d;
+	double	t1;
+	double	t2;
+	t_intersection	tmp;
+
+	find_solution(p, &d, &t1, &t2);
+	if (d < 0)
 	{
-		p->nearest[x][y] = p->solution;
-		p->nearest_object[x][y] = CYLINDER;
+		tmp.yes_intersection = false;
+		return (tmp);
 	}
+	cylinder_intersection(p, t1, t2, &tmp);
+	tmp.type = CYLINDER;
+	return (tmp);
+//	if (p->discriminant >= 0 &&
+//		(p->nearest[x][y] > 0 && p->solution > 0 &&
+//		p->solution < p->nearest[x][y]))
+//	{
+//		p->nearest[x][y] = p->solution;
+//		p->nearest_object[x][y] = CYLINDER;
+//	}
 }
 
 t_intersection	quadratic_formula(t_rt *p)
@@ -168,14 +183,14 @@ void	intersection(t_rt *p, int x, int y)
 //		p->ni = tmp.normal;
 //	}
 	i = 0;
-	while (++i < 3)
+	while (++i < 4)
 	{
 		if (i == 1)
 			tmp = quadratic_formula(p);
 		else if (i == 2)
 			tmp = liner_equation(p);
-//		else if (i == 3)
-//			tmp = cylinder_formula(p);
+		else if (i == 3)
+			tmp = cylinder_formula(p);
 		if (tmp.yes_intersection && tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
 		{
 			p->nearest_object[x][y] = tmp.type;
