@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/14 15:08:49 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 11:58:10 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define M_PI 3.14159265358979323846
 # endif
 # define SHINE 100
+# define DELTA 1.0 / 512
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -59,8 +60,8 @@ struct s_ray
 // intersection
 struct s_intersection
 {
-	bool	has_intersection;
-	double	distance;
+	bool	yes_intersection;
+	double	solution;
 	t_vec3	position;
 	t_vec3	normal;
 };
@@ -157,9 +158,13 @@ typedef struct s_rt
 	t_shape		nearest_object[800][800];
 	t_vec3		pi;
 	t_vec3		ni;
+	t_vec3		pi2l;
+	t_vec3		shadow_start;
+	t_vec3		shadow_direction;
 	t_fcolor	r_a;
 	t_fcolor	r_d;
 	t_fcolor	r_s;
+	t_fcolor	r_all;
 	char		*title;
 	t_camera	c;
 	t_object	sp;

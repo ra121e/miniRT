@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/14 17:28:14 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 12:21:43 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,29 +105,68 @@ void	cylinder_formula(t_rt *p, int x, int y)
 	}
 }
 
-void	quadratic_formula(t_rt *p, int x, int y)
+t_intersection	quadratic_formula(t_rt *p)
 {
 	double	a;
 	double	b;
 	double	c;
+	t_intersection	tmp;
 
 	p->sp2c = vec3_sub(p->c.position, p->sp.center);
 	a = vec3_mag(p->ray_direction) * vec3_mag(p->ray_direction);
 	b = 2 * vec3_dot(p->sp2c, p->ray_direction);
 	c = vec3_dot(p->sp2c, p->sp2c) - p->sp.radius * p->sp.radius;
 	p->discriminant = b * b - 4 * a * c;
-	p->solution = (-b -sqrt(p->discriminant)) / (2 * a);
-//	if (p->discriminant >= 0 &&
-//		(p->solution >= 0 && p->solution < p->nearest[x][y]))
-	if (p->discriminant >= 0 && \
-		(p->nearest[x][y] > 0 && p->solution > 0 && \
-		p->solution < p->nearest[x][y]))
+	if (p->discriminant < 0)
 	{
-		p->nearest[x][y] = p->solution;
-		p->nearest_object[x][y] = SPHERE;
-		p->pi = vec3_add(p->ray_start, vec3_mult(p->ray_direction, p->solution));
-		p->ni = vec3_normalize(vec3_sub(p->pi, p->sp.center));
+		tmp.yes_intersection = false;
+		return (tmp);
 	}
+	tmp.yes_intersection = true;
+	tmp.solution = (-b -sqrt(p->discriminant)) / (2 * a);
+	tmp.position = vec3_add(p->ray_start, vec3_mult(p->ray_direction, tmp.solution));
+	tmp.normal = vec3_normalize(vec3_sub(tmp.position, p->sp.center));
+	return (tmp);
+//	p->solution = (-b -sqrt(p->discriminant)) / (2 * a);
+//	if (p->discriminant >= 0 &&
+//		(p->nearest[x][y] > 0 && p->solution > 0 &&
+//		p->solution < p->nearest[x][y]))
+//	{
+//		p->nearest[x][y] = p->solution;
+//		p->nearest_object[x][y] = SPHERE;
+//		p->pi = vec3_add(p->ray_start, vec3_mult(p->ray_direction, p->solution));
+//		p->ni = vec3_normalize(vec3_sub(p->pi, p->sp.center));
+//	}
+}
+
+void	intersection(t_rt *p, int x, int y)
+{
+	t_intersection	tmp;
+
+//	tmp = liner_equation;
+//	if (tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
+//	{
+//		p->nearest_object[x][y] = PLANE;
+//		p->nearest[x][y] = tmp.solution;
+//		p->pi = tmp.position;
+//		p->ni = tmp.normal;
+//	}
+	tmp = quadratic_formula(p);
+	if (tmp.yes_intersection && tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
+	{
+		p->nearest_object[x][y] = SPHERE;
+		p->nearest[x][y] = tmp.solution;
+		p->pi = tmp.position;
+		p->ni = tmp.normal;
+	}
+//	tmp = cylinder_formula;
+//	if (tmp.solution >= 0 && tmp.solution <= p->nearest[x][y])
+//	{
+//		p->nearest_object[x][y] = CYLINDER;
+//		p->nearest[x][y] = tmp.solution;
+//		p->pi = tmp.position;
+//		p->ni = tmp.normal;
+//	}
 }
 
 void	diffuse(t_rt *p, int x, int y)
@@ -174,70 +213,61 @@ void	specular(t_rt *p, int x, int y)
 		p->r_s = fcolor_init(0, 0, 0);
 }
 
-void	diffuse_cy(t_rt *p)
+void	shadow(t_rt *p)
 {
-	t_vec3	l;
-	double	dotproduct;
+	double	a;
+	double	b;
+	double	c;
+	double	denominator;
+	double	numerator;
+	double	t1;
+	double	t2;
+	double	light_dest;
 
-	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
-	dotproduct = vec3_dot(p->ni, l);
-	if (dotproduct < 0)
-		dotproduct = 0;
-	p->r_d = fcolor_mult_scalar(fcolor_mult(p->cy.material.kdif, p->l.intensity), dotproduct);
-}
+	p->pi2l = vec3_sub(p->l.position, p->pi);
+	p->shadow_start = vec3_add(p->pi, vec3_mult(vec3_normalize(p->pi2l), DELTA));
+	p->shadow_direction = vec3_normalize(p->pi2l);
+	light_dest = vec3_mag(p->pi2l) - DELTA;
 
-void	specular_cy(t_rt *p)
-{
-	t_vec3	l;
-	t_vec3	v;
-	t_vec3	r;
+	p->pl2c = vec3_sub(p->shadow_start, p->pl.center);
+	denominator = vec3_dot(vec3_mult(p->shadow_direction, -1), p->pl.normal);
+	numerator = vec3_dot(p->pl2c, p->pl.normal);
+	p->solution = numerator / denominator;
+	if (p->solution > 0 && p->solution < light_dest)
+		p->r_d = fcolor_init(0, 0, 0);
+	p->sp2c = vec3_sub(p->shadow_start, p->sp.center);
+	a = vec3_mag(p->shadow_direction) * vec3_mag(p->shadow_direction);
+	b = 2 * vec3_dot(p->sp2c, p->shadow_direction);
+	c = vec3_dot(p->sp2c, p->sp2c) - p->sp.radius * p->sp.radius;
+	p->discriminant = b * b - 4 * a * c;
+	p->solution = (-b -sqrt(p->discriminant)) / (2 * a);
+	if (p->solution > 0 && p->solution < light_dest)
+		p->r_d = fcolor_init(0, 0, 0);
 
-	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
-	v = vec3_mult(p->ray_direction, -1);
-	r = vec3_sub(vec3_mult(vec3_mult(p->ni, vec3_dot(p->ni, l)), 2), l);
-	p->r_s = fcolor_mult_scalar(fcolor_mult(p->cy.material.kspe, p->l.intensity), pow(vec3_dot(v, r), p->cy.material.shine));
-	if (vec3_dot(v, r) < 0)
-		p->r_s = fcolor_init(0, 0, 0);
-}
-
-void	diffuse_pl(t_rt *p)
-{
-	t_vec3	l;
-	double	dotproduct;
-
-	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
-	dotproduct = vec3_dot(p->ni, l);
-	if (dotproduct < 0)
-		dotproduct = 0;
-	p->r_d = fcolor_mult_scalar(fcolor_mult(p->pl.material.kdif, p->l.intensity), dotproduct);
-}
-
-void	specular_pl(t_rt *p)
-{
-	t_vec3	l;
-	t_vec3	v;
-	t_vec3	r;
-
-	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
-	v = vec3_mult(p->ray_direction, -1);
-	r = vec3_sub(vec3_mult(vec3_mult(p->ni, vec3_dot(p->ni, l)), 2), l);
-	p->r_s = fcolor_mult_scalar(fcolor_mult(p->pl.material.kspe, p->l.intensity), pow(vec3_dot(v, r), p->pl.material.shine));
-	if (vec3_dot(v, r) < 0)
-		p->r_s = fcolor_init(0, 0, 0);
+	p->cy2c = vec3_sub(p->shadow_start, p->cy.center);
+	a = vec3_mag(vec3_cross(p->shadow_direction, p->cy.normal));
+	a = a * a;
+	b = 2 * vec3_dot(vec3_cross(p->shadow_direction, p->cy.normal), vec3_cross(vec3_sub(p->shadow_start, p->cy.center), p->cy.normal));
+	c = vec3_mag(vec3_cross(vec3_sub(p->shadow_start , p->cy.center), p->cy.normal));
+	c = c * c - p->cy.radius * p->cy.radius;
+	p->discriminant = b * b - 4 * a * c;
+	t1 = (-b - sqrt(p->discriminant)) / ( 2 * a);
+	t2 = (-b + sqrt(p->discriminant)) / ( 2 * a);
+	if ((t1 > 0 && t1 < light_dest) || (t2 > 0 && t2 < light_dest))
+		p->r_d = fcolor_init(0, 0, 0);
 }
 
 int	color(t_rt *p)
 {
-	t_fcolor	r_all;
 	int			red;
 	int			green;
 	int			blue;
 	int			rgb;
 
-	r_all = fcolor_add(fcolor_add(p->r_a, p->r_d), p->r_s);
-	red = (int)(255 * r_all.red);
-	green = (int)(255 * r_all.green);
-	blue = (int)(255 * r_all.blue);
+	p->r_all = fcolor_add(fcolor_add(p->r_a, p->r_d), p->r_s);
+	red = (int)(255 * p->r_all.red);
+	green = (int)(255 * p->r_all.green);
+	blue = (int)(255 * p->r_all.blue);
 	rgb = (red << 16) + (green << 8) + (blue);
 	return (rgb);
 }
@@ -248,55 +278,31 @@ int	raytracing(t_rt *p)
 	int	y;
 	int	offset;
 
-	x = 0;
-	while (x < p->win_x)
+	x = -1;
+	while (++x < p->win_x)
 	{
-		y = 0;
-		while (y < p->win_y)
+		y = -1;
+		while (++y < p->win_y)
 		{
 			screen(p, x, y);
 			liner_equation(p, x, y);
 			cylinder_formula(p, x, y);
-			quadratic_formula(p, x, y);
-//			if (p->discriminant >= 0)
-//			{
-//				if (p->solution < 0 ||
-//					(p->nearest[x][y] > 0 && p->solution > 0 &&
-//					p->nearest[x][y] < p->solution))
-//					continue ;
-//				p->nearest[x][y] = p->solution;
-//			if (p->nearest_object[x][y] == PLANE)
-//			{
+			intersection(p, x, y);
+//			quadratic_formula(p, x, y);
 			diffuse(p, x, y);
 			specular(p, x, y);
+//			shadow(p);
 			if (p->nearest_object[x][y])
 			{
 				offset = y * p->line_size + (x * p->bpp / 8);
 				*(int *)(p->addr + offset) = color(p);
 			}
-//			else if (p->nearest_object[x][y] == SPHERE)
-//			{
-//				diffuse(p);
-//				specular(p);
-//				offset = y * p->line_size + (x * p->bpp / 8);
-//				*(int *)(p->addr + offset) = color(p);
-//			}
-//			else if (p->nearest_object[x][y] == CYLINDER)
-//			{
-//				diffuse_cy(p);
-//				specular_cy(p);
-//				offset = y * p->line_size + (x * p->bpp / 8);
-//				*(int *)(p->addr + offset) = color(p);
-//			}
-//			}
 			else
 			{
 				offset = y * p->line_size + (x * p->bpp / 8);
 				*(int *)(p->addr + offset) = (128 << 24) | 0x00FFFFFF;
 			}
-			y++;
 		}
-		x++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/14 17:23:16 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/15 12:24:40 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	init_value(t_rt *p)
 void	init_camera(t_rt *p)
 {
 	// these values will be from rt file
-	p->c.position = vec3_init(0, 2, -5);
-	p->c.orientation = vec3_init(0, -0.02, 1);
+	p->c.position = vec3_init(0, 4, -5);
+	p->c.orientation = vec3_init(0, -0.5, 1);
 	p->c.fov = deg2rad(70);
 	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
 	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
@@ -61,9 +61,9 @@ void	init_camera(t_rt *p)
 void	init_sphere(t_rt *p)
 {
 	p->sp.type = SPHERE;
-	p->sp.center = vec3_init(4, 2, 5);
-	p->sp.radius = 1;
-	p->sp.material.kdif = fcolor_rgb_convert(255, 0, 255);
+	p->sp.center = vec3_init(0, 1, 3);
+	p->sp.radius = 2;
+	p->sp.material.kdif = fcolor_rgb_convert(0, 0, 255);
 	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	p->sp.material.shine = 80;
 }
@@ -81,10 +81,10 @@ void	init_plane(t_rt *p)
 void	init_cylinder(t_rt *p)
 {
 	p->cy.type = CYLINDER;
-	p->cy.center = vec3_init(0, 0, 0);
-	p->cy.normal = vec3_normalize(vec3_init(0, 1, 1));
-	p->cy.radius = 1;
-	p->cy.height = 15;
+	p->cy.center = vec3_init(2, 0, 0);
+	p->cy.normal = vec3_normalize(vec3_init(-1, 1, 1));
+	p->cy.radius = 0.3;
+	p->cy.height = 10;
 	p->cy.material.kdif = fcolor_rgb_convert(255, 0, 0);
 	p->cy.material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	p->cy.material.shine = 100;
@@ -93,7 +93,7 @@ void	init_cylinder(t_rt *p)
 void	init_light(t_rt *p)
 {
 	p->l.intensity = fcolor_mult_scalar(fcolor_rgb_convert(255, 255, 255), 0.7);
-	p->l.position = vec3_init(50, 30, -20);
+	p->l.position = vec3_init(50, 50, -50);
 }
 
 void	init_ambient(t_rt *p)
