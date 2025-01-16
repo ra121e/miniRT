@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 21:37:38 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/16 14:57:53 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,9 +181,11 @@ typedef struct s_rt
 	t_vec3		pi2l;
 	t_vec3		shadow_start;
 	t_vec3		shadow_direction;
+	bool		yes_shadow;
 	t_fcolor	r_a;
 	t_fcolor	r_d;
 	t_fcolor	r_s;
+	t_fcolor	r_surface;
 	t_fcolor	r_all;
 	char		*title;
 	t_camera	c;

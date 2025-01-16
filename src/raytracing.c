@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/15 22:03:47 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/16 15:05:54 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,15 @@ t_intersection	quadratic_formula(t_rt *p, t_ray ray)
 	return (tmp);
 }
 
-void	intersection(t_rt *p, int x, int y, t_ray ray)
+void	intersection(t_rt *p, int x, int y)
 {
 	t_intersection	tmp;
-	int	i;
+	t_ray			ray;
+	int				i;
 
+
+	ray.direction = p->ray_direction;
+	ray.start = p->ray_start;
 	i = 0;
 	while (++i < 4)
 	{
@@ -220,6 +224,7 @@ void	shadow(t_rt *p)
 	t_ray	ray;
 	int	i;
 
+	p->yes_shadow = false;
 	p->pi2l = vec3_sub(p->l.position, p->pi);
 	p->shadow_start = vec3_add(p->pi, vec3_mult(vec3_normalize(p->pi2l), DELTA));
 	p->shadow_direction = vec3_normalize(p->pi2l);
@@ -236,7 +241,7 @@ void	shadow(t_rt *p)
 		else if (i == 3)
 			tmp = liner_equation(p, ray);
 		if (tmp.yes_intersection == true && tmp.solution >= 0 && tmp.solution <= light_distance)
-			p->r_d = fcolor_init(0, 0, 0);
+			p->yes_shadow = true;
 	}
 }
 
@@ -247,7 +252,10 @@ int	color(t_rt *p)
 	int			blue;
 	int			rgb;
 
-	p->r_all = fcolor_add(fcolor_add(p->r_a, p->r_d), p->r_s);
+	p->r_surface = fcolor_add(p->r_d, p->r_s);
+	if (p->yes_shadow == true)
+		p->r_surface = fcolor_init(0, 0, 0);
+	p->r_all = fcolor_add(p->r_surface, p->r_a);
 	red = (int)(255 * p->r_all.red);
 	green = (int)(255 * p->r_all.green);
 	blue = (int)(255 * p->r_all.blue);
@@ -275,7 +283,6 @@ int	raytracing(t_rt *p)
 {
 	int	x;
 	int	y;
-	t_ray	ray;
 
 	x = -1;
 	while (++x < p->win_x)
@@ -284,9 +291,7 @@ int	raytracing(t_rt *p)
 		while (++y < p->win_y)
 		{
 			screen(p, x, y);
-			ray.direction = p->ray_direction;
-			ray.start = p->ray_start;
-			intersection(p, x, y, ray);
+			intersection(p, x, y);
 			diffuse(p, x, y);
 			specular(p, x, y);
 			shadow(p);
