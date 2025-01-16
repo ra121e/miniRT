@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:31:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 22:58:09 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/16 16:45:39 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	main(int argc, char **argv)
 	if (init(p, argv[1]))
 		return (1);//cleanup before exit
 	raytracing(p);
-	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
-	mlx_destroy_image(p->mlx, p->img);
 	mlx_hook(p->win, DestroyNotify, NoEventMask, close_win, p);
 	mlx_hook(p->win, KeyPress, KeyPressMask, handler_key, p);
 	mlx_loop(p->mlx);

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/16 15:05:54 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/16 17:30:35 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,12 @@ int	raytracing(t_rt *p)
 	int	x;
 	int	y;
 
+	p->img = mlx_new_image(p->mlx, p->win_x, p->win_y);
+	if (p->img == NULL)
+		return (1);
+	p->addr = mlx_get_data_addr(p->img, &p->bpp, &p->line_size, &p->endian);
+	if (p->addr == NULL)
+		return (1);
 	x = -1;
 	while (++x < p->win_x)
 	{
@@ -298,5 +304,7 @@ int	raytracing(t_rt *p)
 			draw(p, x, y);
 		}
 	}
+	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+	mlx_destroy_image(p->mlx, p->img);
 	return (0);
 }
