@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/16 14:57:53 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/16 18:14:54 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,7 @@ int		init_obj(char **e, t_rt *p);
 // init utils
 int		init_rgb(char *str, t_fcolor *p);
 int		init_vec3(char *str, t_vec3 *p);
+void	init_nearest(t_rt *p);
 
 // general
 int		close_win(void *param);
@@ -224,6 +225,7 @@ int		color(t_rt *p);
 int		raytracing(t_rt *p);
 int		raytracing_pl(t_rt *p);
 int		raytracing_cy(t_rt *p);
+int		move_camera(t_rt *p, t_vec3 offset);
 
 // general utils
 int		is_int(char *str);
