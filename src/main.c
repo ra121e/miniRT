@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:31:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/16 16:45:39 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 16:33:43 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	main(int argc, char **argv)
 		ft_dprintf(2, "Failed to malloc struct\n");
 		exit(1);
 	}
-	if (init(p, argv[1]))
-		return (1);//cleanup before exit
+	init(p, argv[1]);
 	raytracing(p);
 	mlx_hook(p->win, DestroyNotify, NoEventMask, close_win, p);
 	mlx_hook(p->win, KeyPress, KeyPressMask, handler_key, p);

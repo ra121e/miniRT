@@ -6,11 +6,23 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/16 18:15:24 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 16:48:34 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	cleanup(t_rt *p, int status)
+{
+	if (status >= 2)
+	{
+		mlx_destroy_display(p->mlx);
+		free(p->mlx);
+	}
+	if (status >= 1)
+		free(p);
+	exit(status);
+}
 
 void	init_nearest(t_rt *p)
 {
@@ -44,15 +56,15 @@ void	init_value(t_rt *p)
 	init_nearest(p);
 }
 
-int	init(t_rt *p, char *rt)
+void	init(t_rt *p, char *rt)
 {
 	init_value(p);
-	init_file(rt, p);
+	if (init_file(rt, p))
+		cleanup(p, 1);
 	p->mlx = mlx_init();
-	if (p->mlx == NULL)
-		return (1);
+	if (!p->mlx)
+		cleanup(p, 1);
 	p->win = mlx_new_window(p->mlx, p->win_x, p->win_y, p->title);
-	if (p->win == NULL)
-		return (1);
-	return (0);
+	if (!p->win)
+		cleanup(p, 2);
 }
