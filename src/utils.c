@@ -6,13 +6,13 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 07:26:00 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/15 21:09:53 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 21:30:26 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-double  deg2rad(double a)
+double	deg2rad(double a)
 {
 	return (a / 180 * M_PI);
 }

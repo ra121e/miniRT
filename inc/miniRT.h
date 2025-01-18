@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 21:24:40 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 21:33:38 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ int		handler_key(int keycode, void *param);
 void	screen(t_rt *p, double x, double y);
 void	diffuse(t_rt *p, int x, int y);
 void	specular(t_rt *p, int x, int y);
-void	shadow(t_rt *p);
+void	shadow(t_rt *p, int i);
 int		color(t_rt *p);
 void	draw(t_rt *p, int x, int y);
 int		raytracing(t_rt *p);

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/18 12:49:37 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/18 21:36:01 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,9 @@ int	raytracing(t_rt *p)
 			intersection(p, x, y);
 			diffuse(p, x, y);
 			specular(p, x, y);
-			shadow(p);
+			shadow(p, 0);
 			draw(p, x, y);
 		}
 	}
-	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
-	mlx_destroy_image(p->mlx, p->img);
 	return (0);
 }

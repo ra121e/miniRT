@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:06:58 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 21:23:00 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 21:31:30 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	init_a(char **e, t_rt *p)
 
 	if (init_rgb(e[2], &rgb))
 		cleanup(p, 1);
-	p->r_a = fcolor_mult_scalar(fcolor_init(
-			rgb.red / 255, rgb.green / 255, rgb.blue / 255), ft_atof(e[1]));
+	p->r_a = fcolor_mult_scalar(
+			fcolor_init(rgb.red / 255, rgb.green / 255, rgb.blue / 255),
+			ft_atof(e[1]));
 }
 
 void	init_c(char **e, t_rt *p)

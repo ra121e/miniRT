@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:18:04 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/18 13:05:12 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/18 21:33:20 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,11 @@ void	specular(t_rt *p, int x, int y)
 		p->r_s = fcolor_init(0, 0, 0);
 }
 
-void	shadow(t_rt *p)
+void	shadow(t_rt *p, int i)
 {
 	double			light_distance;
 	t_intersection	tmp;
 	t_ray			ray;
-	int				i;
 
 	p->yes_shadow = false;
 	p->pi2l = vec3_sub(p->l.position, p->pi);
@@ -72,7 +71,6 @@ void	shadow(t_rt *p)
 	light_distance = vec3_mag(p->pi2l) - DELTA;
 	ray.direction = p->shadow_direction;
 	ray.start = p->shadow_start;
-	i = 0;
 	while (++i < 4)
 	{
 		if (i == 1)
