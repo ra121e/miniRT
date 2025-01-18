@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 21:33:38 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 21:51:44 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define M_PI 3.14159265358979323846
 # endif
 # define SHINE 100
-# define DELTA 1.0 / 512
+# define DELTA 0.001953125 
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -105,9 +105,6 @@ struct s_fcolor
 	double	red;
 	double	green;
 	double	blue;
-//	int	r;
-//	int	g;
-//	int	b;
 };
 
 // constants(konstant) of material
@@ -117,7 +114,6 @@ struct s_material
 	t_fcolor	kspe;
 	float		shine;
 };
-
 
 struct s_object
 {
@@ -157,7 +153,6 @@ struct s_camera
 struct s_light
 {
 	t_vec3		position;
-//	double		intensity;//shouldn't intensity be double instead of fcolor?
 	t_fcolor	intensity;
 	t_fcolor	color;
 };
@@ -165,7 +160,7 @@ struct s_light
 // data structure
 struct s_dlist
 {
-	void	*content;
+	void			*content;
 	struct s_dlist	*next;
 	struct s_dlist	*prev;
 };
@@ -209,29 +204,28 @@ typedef struct s_rt
 	t_object	pl;
 	t_object	cy;
 	t_light		l;
-//	t_fcolor	a;
 	t_a_light	a;
 }	t_rt;
 
 // input validation
-int		input_validation(char *arg);
-int		validate_acl(char **e);
-int		validate_obj(char **e);
+int				input_validation(char *arg);
+int				validate_acl(char **e);
+int				validate_obj(char **e);
 
 // input validation utils
-int		validate_rgb(char *str);
-int		validate_vec3(char *str, double min, double max);
+int				validate_rgb(char *str);
+int				validate_vec3(char *str, double min, double max);
 
 // init
-void	init(t_rt *p, char *rt);
-int		init_file(char *rt, t_rt *p);
-void	init_acl(char **e, t_rt *p);
-void	init_obj(char **e, t_rt *p);
+void			init(t_rt *p, char *rt);
+int				init_file(char *rt, t_rt *p);
+void			init_acl(char **e, t_rt *p);
+void			init_obj(char **e, t_rt *p);
 
 // init utils
-int		init_rgb(char *str, t_fcolor *p);
-int		init_vec3(char *str, t_vec3 *p);
-void	init_nearest(t_rt *p);
+int				init_rgb(char *str, t_fcolor *p);
+int				init_vec3(char *str, t_vec3 *p);
+void			init_nearest(t_rt *p);
 
 // math caluculation
 t_intersection	liner_equation(t_rt *p, t_ray ray);
@@ -239,49 +233,49 @@ t_intersection	quadratic_formula(t_rt *p, t_ray ray);
 t_intersection	cylinder_formula(t_rt *p, t_ray ray);
 
 // general
-void	cleanup(t_rt *p, int status);
-int		close_win(void *param);
-int		handler_key(int keycode, void *param);
-void	screen(t_rt *p, double x, double y);
-void	diffuse(t_rt *p, int x, int y);
-void	specular(t_rt *p, int x, int y);
-void	shadow(t_rt *p, int i);
-int		color(t_rt *p);
-void	draw(t_rt *p, int x, int y);
-int		raytracing(t_rt *p);
-int		raytracing_pl(t_rt *p);
-int		raytracing_cy(t_rt *p);
-int		move_camera(t_rt *p, t_vec3 offset);
+void			cleanup(t_rt *p, int status);
+int				close_win(void *param);
+int				handler_key(int keycode, void *param);
+void			screen(t_rt *p, double x, double y);
+void			diffuse(t_rt *p, int x, int y);
+void			specular(t_rt *p, int x, int y);
+void			shadow(t_rt *p, int i);
+int				color(t_rt *p);
+void			draw(t_rt *p, int x, int y);
+int				raytracing(t_rt *p);
+int				raytracing_pl(t_rt *p);
+int				raytracing_cy(t_rt *p);
+int				move_camera(t_rt *p, t_vec3 offset);
 
 // general utils
-int		is_int(char *str);
-int		is_double(char *str);
-double	ft_atof(char *str);
+int				is_int(char *str);
+int				is_double(char *str);
+double			ft_atof(char *str);
 
 // vector utils
-t_vec3	vec3_init(double x, double y, double z);
-t_vec3	vec3_add(t_vec3 a, t_vec3 b);
-t_vec3	vec3_sub(t_vec3 a, t_vec3 b);
-t_vec3	vec3_mult(t_vec3 a, double b);
-double	vec3_dot(t_vec3 a, t_vec3 b);
-t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
-double	vec3_mag(t_vec3 a);
-t_vec3	vec3_normalize(t_vec3 a);
-int		get_vec3_from_str(t_vec3 *vec, char *str);
+t_vec3			vec3_init(double x, double y, double z);
+t_vec3			vec3_add(t_vec3 a, t_vec3 b);
+t_vec3			vec3_sub(t_vec3 a, t_vec3 b);
+t_vec3			vec3_mult(t_vec3 a, double b);
+double			vec3_dot(t_vec3 a, t_vec3 b);
+t_vec3			vec3_cross(t_vec3 a, t_vec3 b);
+double			vec3_mag(t_vec3 a);
+t_vec3			vec3_normalize(t_vec3 a);
+int				get_vec3_from_str(t_vec3 *vec, char *str);
 
 // fcolor utils
-t_fcolor	fcolor_normalize(t_fcolor fcolor);
-t_fcolor	fcolor_init(double red, double green, double blue);
-t_fcolor	fcolor_add(t_fcolor a, t_fcolor b);
-t_fcolor	fcolor_mult(t_fcolor a, t_fcolor b);
-t_fcolor	fcolor_mult_scalar(t_fcolor a, double b);
-t_fcolor	fcolor_rgb_convert(double r, double g, double b);
+t_fcolor		fcolor_normalize(t_fcolor fcolor);
+t_fcolor		fcolor_init(double red, double green, double blue);
+t_fcolor		fcolor_add(t_fcolor a, t_fcolor b);
+t_fcolor		fcolor_mult(t_fcolor a, t_fcolor b);
+t_fcolor		fcolor_mult_scalar(t_fcolor a, double b);
+t_fcolor		fcolor_rgb_convert(double r, double g, double b);
 
 // dlist
-t_dlist	*dlst_new(void *content);
-t_dlist	*dlst_add_right(t_dlist **lst, t_dlist *new);
+t_dlist			*dlst_new(void *content);
+t_dlist			*dlst_add_right(t_dlist **lst, t_dlist *new);
 
 // math utils
-double	deg2rad(double a);
+double			deg2rad(double a);
 
 #endif
