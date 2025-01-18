@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 12:34:51 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/18 16:18:41 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_vec3			t_vec3;
 typedef struct s_dlist			t_dlist;
 typedef struct s_ray			t_ray;
 typedef struct s_intersection	t_intersection;
+typedef struct s_wrap			t_wrap;
 typedef struct s_fcolor			t_fcolor;
 typedef struct s_object			t_object;
 typedef struct s_a_light		t_a_light;
@@ -81,6 +82,21 @@ struct s_intersection
 	t_vec3	position;
 	t_vec3	normal;
 	t_shape	type;
+};
+
+// wrap
+struct s_wrap
+{
+	double	a;
+	double	b;
+	double	c;
+	double	d;
+	double	t1;
+	double	t2;
+	t_vec3	p1;
+	t_vec3	p2;
+	double	height_t1;
+	double	height_t2;
 };
 
 // color factor
