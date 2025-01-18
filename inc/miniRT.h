@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/16 18:14:54 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 12:34:51 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,11 +217,20 @@ int		init_rgb(char *str, t_fcolor *p);
 int		init_vec3(char *str, t_vec3 *p);
 void	init_nearest(t_rt *p);
 
+// math caluculation
+t_intersection	liner_equation(t_rt *p, t_ray ray);
+t_intersection	quadratic_formula(t_rt *p, t_ray ray);
+t_intersection	cylinder_formula(t_rt *p, t_ray ray);
+
 // general
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
 void	screen(t_rt *p, double x, double y);
+void	diffuse(t_rt *p, int x, int y);
+void	specular(t_rt *p, int x, int y);
+void	shadow(t_rt *p);
 int		color(t_rt *p);
+void	draw(t_rt *p, int x, int y);
 int		raytracing(t_rt *p);
 int		raytracing_pl(t_rt *p);
 int		raytracing_cy(t_rt *p);

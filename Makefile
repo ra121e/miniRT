@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/16 16:44:02 by xlok             ###   ########.fr        #
+#    Updated: 2025/01/18 12:32:44 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,14 @@ SRC_F := main.c \
 		 handler.c \
 		 ft_atof.c \
 		 vec3.c \
+		 vec3_fnc.c \
 		 dlist.c \
+		 math.c \
+		 lighting.c \
+		 drawing.c \
 		 raytracing.c \
 		 fcolor.c \
+		 fcolor_fnc.c \
 		 move_camera.c
 
 SRC := $(SRC_F:%.c=$(SRC_DIR)/%.c)
