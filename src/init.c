@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 16:48:34 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 18:36:35 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ void	init_value(t_rt *p)
 	p->win_x = 800;
 	p->win_y = 800;
 	p->title = "miniRT";
+	p->pi2l.x = 0;
+	p->pi2l.y = 0;
+	p->pi2l.z = 0;
+	p->pi.x = 0;
+	p->pi.y = 0;
+	p->pi.z = 0;
 	init_nearest(p);
 }
 
