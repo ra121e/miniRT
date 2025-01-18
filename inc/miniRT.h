@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 17:31:10 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 21:24:40 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ t_intersection	quadratic_formula(t_rt *p, t_ray ray);
 t_intersection	cylinder_formula(t_rt *p, t_ray ray);
 
 // general
+void	cleanup(t_rt *p, int status);
 int		close_win(void *param);
 int		handler_key(int keycode, void *param);
 void	screen(t_rt *p, double x, double y);

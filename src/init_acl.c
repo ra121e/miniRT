@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:06:58 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 15:56:06 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/18 21:23:00 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	init_a(char **e, t_rt *p)
 {
-	p->r_a = fcolor_mult_scalar(fcolor_init(255, 255, 255), ft_atof(e[1]));
-//	p->a.intensity = ft_atof(e[1]);
-//	init_rgb(e[2], &p->a.color);
+	t_fcolor	rgb;
+
+	if (init_rgb(e[2], &rgb))
+		cleanup(p, 1);
+	p->r_a = fcolor_mult_scalar(fcolor_init(
+			rgb.red / 255, rgb.green / 255, rgb.blue / 255), ft_atof(e[1]));
 }
 
 void	init_c(char **e, t_rt *p)
@@ -40,14 +43,13 @@ void	init_l(char **e, t_rt *p)
 	init_vec3(e[1], &p->l.position);
 	p->l.intensity = fcolor_mult_scalar(
 			fcolor_rgb_convert(255, 255, 255), ft_atof(e[2]));
-//	p->l.intensity = ft_atof(e[2]);
 }
 
 void	init_acl(char **e, t_rt *p)
 {
 	if (!ft_strncmp(*e, "A", 2))
 		init_a(e, p);
-	if (!ft_strncmp(*e, "C", 2))
+	else if (!ft_strncmp(*e, "C", 2))
 		init_c(e, p);
 	else if (!ft_strncmp(*e, "L", 2))
 		init_l(e, p);
