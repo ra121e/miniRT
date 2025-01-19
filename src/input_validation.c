@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:32:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/19 12:16:55 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/19 14:31:11 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,21 @@ static int	loop(int fd)
 int	validate_file(char *rt)
 {
 	int	fd;
+	int	fd_d;
 	int	status;
 
 	fd = open(rt, O_RDONLY);
 	if (fd == -1)
 		return (perror("Error\n"), 1);
+	fd_d = open(rt, O_DIRECTORY);
+	if (fd_d != -1)
+	{
+		if (close(fd) == -1)
+			return (perror("Error\n"), 1);
+		if (close(fd_d) == -1)
+			return (perror("Error\n"), 1);
+		return (ft_dprintf(2, "Error\n.rt is directory\n"), 1);
+	}
 	status = loop(fd);
 	if (close(fd) == -1)
 		return (perror("Error\n"), 1);
