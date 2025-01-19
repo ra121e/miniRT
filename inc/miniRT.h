@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 21:51:44 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/19 12:12:11 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ int				move_camera(t_rt *p, t_vec3 offset);
 int				is_int(char *str);
 int				is_double(char *str);
 double			ft_atof(char *str);
+int				clear_gnl(int fd);
 
 // vector utils
 t_vec3			vec3_init(double x, double y, double z);

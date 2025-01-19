@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 07:26:00 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 21:30:26 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/19 12:11:37 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,22 @@ int	is_double(char *str)
 		if (!ft_isdigit(*str++))
 			return (0);
 	return (1);
+}
+
+int	clear_gnl(int fd)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = gnl(fd);
+		if (!line)
+			return (0);
+		if (*line == '\n')
+		{
+			free(line);
+			continue ;
+		}
+		free(line);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:32:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/11 18:18:53 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/19 12:16:55 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static int	loop(int fd)
 		element = ft_split(line, ' ');
 		free(line);
 		if (!element)
-			return (ft_dprintf(2, "ft_split fail\n"), 1);
+			return (clear_gnl(fd), ft_dprintf(2, "ft_split fail\n"), 1);
 		if (validate_element(element))
-			return (ft_free_array(element), 1);
+			return (clear_gnl(fd), ft_free_array(element), 1);
 		ft_free_array(element);
 	}
 }

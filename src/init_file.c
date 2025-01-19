@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:32:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 15:58:15 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/19 12:13:12 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	loop(int fd, t_rt *p)
 		element = ft_split(line, ' ');
 		free(line);
 		if (!element)
-			return (ft_dprintf(2, "ft_split fail\n"), 1);
+			return (clear_gnl(fd), ft_dprintf(2, "ft_split fail\n"), 1);
 		init_element(element, p);
 		ft_free_array(element);
 	}
