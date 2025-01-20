@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:31:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 20:18:17 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 21:01:58 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || input_validation(argv[1], &acl, &obj_num))
 		exit(1);
-	printf("num of obj: %d\n", obj_num);
 	p = malloc(sizeof(t_rt));
 	if (!p)
 	{
 		ft_dprintf(2, "Failed to malloc struct\n");
 		exit(1);
 	}
+	p->nb_obj = obj_num;
 	init(p, argv[1]);
 	raytracing(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);

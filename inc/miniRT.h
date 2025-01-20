@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 19:56:19 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 20:59:24 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,8 @@ typedef struct s_rt
 	t_fcolor	r_all;
 	char		*title;
 	t_camera	c;
+	int			nb_obj;
+	t_object	**obj;
 	t_object	sp;
 	t_object	pl;
 	t_object	cy;

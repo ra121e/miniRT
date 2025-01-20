@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:20:24 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 18:36:35 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/20 20:57:44 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ void	init_value(t_rt *p)
 
 void	init(t_rt *p, char *rt)
 {
+	p->obj = malloc(sizeof(t_object) * p->nb_obj);
+	if (!p->obj)
+	{
+		ft_dprintf(2, "Failed to malloc obj\n");
+		cleanup(p, 1);
+	}
 	init_value(p);
 	if (init_file(rt, p))
 		cleanup(p, 1);
