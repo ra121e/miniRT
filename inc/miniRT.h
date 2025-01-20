@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 21:12:15 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/20 22:40:05 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ int				validate_vec3(char *str, double min, double max);
 void			init(t_rt *p, char *rt);
 int				init_file(char *rt, t_rt *p);
 void			init_acl(char **e, t_rt *p);
-void			init_obj(char **e, t_rt *p);
+int				init_obj(char **e, t_rt *p);
 
 // init utils
 int				init_rgb(char *str, t_fcolor *p);
