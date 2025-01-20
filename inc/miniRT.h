@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 20:59:24 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 21:12:15 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define M_PI 3.14159265358979323846
 # endif
 # define SHINE 100
-# define DELTA 0.001953125 
+# define DELTA 0.001953125
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -239,6 +239,7 @@ void			cleanup(t_rt *p, int status);
 int				close_win(void *param);
 int				handler_key(int keycode, void *param);
 void			screen(t_rt *p, double x, double y);
+void			assign_obj(t_rt *p, int i);
 void			diffuse(t_rt *p, int x, int y);
 void			specular(t_rt *p, int x, int y);
 void			shadow(t_rt *p, int i);

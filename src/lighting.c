@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:18:04 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/18 21:33:20 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 21:22:08 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,24 @@ void	shadow(t_rt *p, int i)
 	light_distance = vec3_mag(p->pi2l) - DELTA;
 	ray.direction = p->shadow_direction;
 	ray.start = p->shadow_start;
-	while (++i < 4)
+	i = -1;
+	while (++i < p->nb_obj)
 	{
-		if (i == 1)
+		assign_obj(p, i);
+		if (p->obj[i]->type == SPHERE)
 			tmp = quadratic_formula(p, ray);
-		else if (i == 2)
-			tmp = cylinder_formula(p, ray);
-		else if (i == 3)
+		else if (p->obj[i]->type == PLANE)
 			tmp = liner_equation(p, ray);
+		else if (p->obj[i]->type == CYLINDER)
+			tmp = cylinder_formula(p, ray);
+//	while (++i < 4)
+//	{
+//		if (i == 1)
+//			tmp = quadratic_formula(p, ray);
+//		else if (i == 2)
+//			tmp = cylinder_formula(p, ray);
+//		else if (i == 3)
+//			tmp = liner_equation(p, ray);
 		if (tmp.yes_intersection == true && tmp.solution >= 0 \
 			&& tmp.solution <= light_distance)
 			p->yes_shadow = true;

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/18 21:36:01 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 22:05:39 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ void	intersection(t_rt *p, int x, int y)
 
 	ray.direction = p->ray_direction;
 	ray.start = p->ray_start;
-	i = 0;
-	while (++i < 4)
+	i = -1;
+	while (++i < p->nb_obj)
 	{
-		if (i == 1)
+		assign_obj(p, i);
+		if (p->obj[i]->type == SPHERE)
 			tmp = quadratic_formula(p, ray);
-		else if (i == 2)
+		else if (p->obj[i]->type == PLANE)
 			tmp = liner_equation(p, ray);
-		else if (i == 3)
+		else if (p->obj[i]->type == CYLINDER)
 			tmp = cylinder_formula(p, ray);
 		if (tmp.yes_intersection && tmp.solution >= 0 \
 			&& tmp.solution <= p->nearest[x][y])

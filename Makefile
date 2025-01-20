@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/04 18:35:52 by xlok              #+#    #+#              #
-#    Updated: 2025/01/18 16:48:56 by xlok             ###   ########.fr        #
+#    Updated: 2025/01/20 21:12:54 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_F := main.c \
 		 vec3.c \
 		 vec3_fnc.c \
 		 dlist.c \
+		 assign.c \
 		 math.c \
 		 lighting.c \
 		 drawing.c \
