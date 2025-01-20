@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/19 12:12:11 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 19:56:19 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,9 @@ typedef struct s_rt
 }	t_rt;
 
 // input validation
-int				input_validation(char *arg);
-int				validate_acl(char **e);
-int				validate_obj(char **e);
+int				input_validation(char *arg, t_vec3 *acl, int *obj_num);
+int				validate_acl(char **e, t_vec3 *acl);
+int				validate_obj(char **e, int *obj_num);
 
 // input validation utils
 int				validate_rgb(char *str);

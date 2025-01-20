@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:31:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 21:36:05 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 20:18:17 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	t_rt		*p;
+	t_rt	*p;
+	t_vec3	acl;
+	int		obj_num;
 
-	if (argc != 2 || input_validation(argv[1]))
+	if (argc != 2 || input_validation(argv[1], &acl, &obj_num))
 		exit(1);
+	printf("num of obj: %d\n", obj_num);
 	p = malloc(sizeof(t_rt));
 	if (!p)
 	{

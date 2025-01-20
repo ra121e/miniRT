@@ -6,14 +6,15 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:06:58 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 19:15:40 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 19:59:36 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	validate_sp(char **e)
+int	validate_sp(char **e, int *obj_num)
 {
+	++*obj_num;
 	if (!e[1] || validate_vec3(e[1], XYZ_MIN, XYZ_MAX)
 		|| !e[2] || !is_double(e[2]) || ft_atof(e[2]) <= 0
 		|| !e[3] || validate_rgb(e[3])
@@ -22,8 +23,9 @@ int	validate_sp(char **e)
 	return (0);
 }
 
-int	validate_pl(char **e)
+int	validate_pl(char **e, int *obj_num)
 {
+	++*obj_num;
 	if (!e[1] || validate_vec3(e[1], XYZ_MIN, XYZ_MAX)
 		|| !e[2] || validate_vec3(e[2], -1, 1)
 		|| !e[3] || validate_rgb(e[3])
@@ -32,8 +34,9 @@ int	validate_pl(char **e)
 	return (0);
 }
 
-int	validate_cy(char **e)
+int	validate_cy(char **e, int *obj_num)
 {
+	++*obj_num;
 	if (!e[1] || validate_vec3(e[1], XYZ_MIN, XYZ_MAX)
 		|| !e[2] || validate_vec3(e[2], -1, 1)
 		|| !e[3] || !is_double(e[3]) || ft_atof(e[3]) <= 0
@@ -44,13 +47,13 @@ int	validate_cy(char **e)
 	return (0);
 }
 
-int	validate_obj(char **e)
+int	validate_obj(char **e, int *obj_num)
 {
 	if (!ft_strncmp(*e, "sp", 3))
-		return (validate_sp(e));
+		return (validate_sp(e, obj_num));
 	else if (!ft_strncmp(*e, "pl", 3))
-		return (validate_pl(e));
+		return (validate_pl(e, obj_num));
 	else if (!ft_strncmp(*e, "cy", 3))
-		return (validate_cy(e));
+		return (validate_cy(e, obj_num));
 	return (0);
 }

@@ -6,26 +6,26 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:32:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/19 14:31:11 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 20:17:11 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	validate_element(char **e)
+int	validate_element(char **e, t_vec3 *acl, int *obj_num)
 {
 	if (!ft_strncmp(e[0], "A", 2) || !ft_strncmp(e[0], "C", 2)
 		|| !ft_strncmp(e[0], "L", 2))
-		return (validate_acl(e));
+		return (validate_acl(e, acl));
 	else if (!ft_strncmp(e[0], "pl", 3) || !ft_strncmp(e[0], "sp", 3)
 		|| !ft_strncmp(e[0], "cy", 3))
-		return (validate_obj(e));
+		return (validate_obj(e, obj_num));
 	else
 		return (ft_dprintf(2, "Error\nInvalid element identifier\n"), 1);
 	return (0);
 }
 
-static int	loop(int fd)
+static int	loop(int fd, t_vec3 *acl, int *obj_num)
 {
 	char	*line;
 	char	**element;
@@ -45,13 +45,13 @@ static int	loop(int fd)
 		free(line);
 		if (!element)
 			return (clear_gnl(fd), ft_dprintf(2, "ft_split fail\n"), 1);
-		if (validate_element(element))
+		if (validate_element(element, acl, obj_num))
 			return (clear_gnl(fd), ft_free_array(element), 1);
 		ft_free_array(element);
 	}
 }
 
-int	validate_file(char *rt)
+int	validate_file(char *rt, t_vec3 *acl, int *obj_num)
 {
 	int	fd;
 	int	fd_d;
@@ -69,20 +69,28 @@ int	validate_file(char *rt)
 			return (perror("Error\n"), 1);
 		return (ft_dprintf(2, "Error\n.rt is directory\n"), 1);
 	}
-	status = loop(fd);
+	status = loop(fd, acl, obj_num);
 	if (close(fd) == -1)
 		return (perror("Error\n"), 1);
 	return (status);
 }
 
-int	input_validation(char *arg)
+int	input_validation(char *arg, t_vec3 *acl, int *obj_num)
 {
 	if (ft_strlen(arg) < 4
 		|| ft_strncmp(arg + ft_strlen(arg) - 3, ".rt", 4)
 		|| !ft_isalnum(*arg))
 		return (ft_dprintf(2, "Error: "
 				"Pls enter a .rt file starting with alphanumeric\n"), 1);
-	if (validate_file(arg))
+	acl->x = 0;
+	acl->y = 0;
+	acl->z = 0;
+	*obj_num = 0;
+	if (validate_file(arg, acl, obj_num))
 		return (1);
+	if (!acl->x || !acl->y || !acl->z)
+		return (printf("Error\nIncomplete acl\n"), 1);
+	if (!*obj_num)
+		return (printf("Error\nNeed at least 1 object\n"), 1);
 	return (0);
 }
