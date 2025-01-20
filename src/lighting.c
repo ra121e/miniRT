@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:18:04 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/20 21:22:08 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:38:13 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ void	diffuse(t_rt *p, int x, int y)
 	double		dotproduct;
 	t_fcolor	kdif;
 
-	if (p->nearest_object[x][y] == PLANE)
-		kdif = p->pl.material.kdif;
-	else if (p->nearest_object[x][y] == SPHERE)
-		kdif = p->sp.material.kdif;
-	else if (p->nearest_object[x][y] == CYLINDER)
-		kdif = p->cy.material.kdif;
-	else
-		return ;
+//	if (p->nearest_object[x][y] == PLANE)
+//		kdif = p->pl.material.kdif;
+//	else if (p->nearest_object[x][y] == SPHERE)
+//		kdif = p->sp.material.kdif;
+//	else if (p->nearest_object[x][y] == CYLINDER)
+//		kdif = p->cy.material.kdif;
+//	else
+//		return ;
+	kdif = p->obj[p->nearest_nb_obj[x][y]]->material.kdif;
 	l = vec3_normalize(vec3_sub(p->l.position, p->pi));
 	dotproduct = vec3_dot(p->ni, l);
 	if (dotproduct < 0)

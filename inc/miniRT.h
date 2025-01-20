@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 21:12:15 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:27:29 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct s_rt
 	double		solution;
 	double		nearest[800][800];
 	t_shape		nearest_object[800][800];
+	int			nearest_nb_obj[800][800];
 	t_vec3		pi;
 	t_vec3		ni;
 	t_vec3		pi2l;
