@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 22:40:05 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 23:15:47 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ typedef struct s_rt
 	t_vec3		shadow_start;
 	t_vec3		shadow_direction;
 	bool		yes_shadow;
+	t_fcolor	kdif;
+	t_fcolor	kspe;
 	t_fcolor	r_a;
 	t_fcolor	r_d;
 	t_fcolor	r_s;

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/20 22:05:39 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:16:31 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	intersection(t_rt *p, int x, int y)
 			p->nearest[x][y] = tmp.solution;
 			p->pi = tmp.position;
 			p->ni = tmp.normal;
+			p->kdif = p->obj[i]->material.kdif;
+			p->kspe = p->obj[i]->material.kspe;
 		}
 	}
 }
