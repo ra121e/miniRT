@@ -6,20 +6,21 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:32:48 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 20:39:31 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 21:48:09 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	init_element(char **e, t_rt *p)
+int	init_element(char **e, t_rt *p)
 {
 	if (!ft_strncmp(e[0], "A", 2) || !ft_strncmp(e[0], "C", 2)
 		|| !ft_strncmp(e[0], "L", 2))
-		init_acl(e, p);
+		return (init_acl(e, p), 0);
 	else if (!ft_strncmp(e[0], "pl", 3) || !ft_strncmp(e[0], "sp", 3)
 		|| !ft_strncmp(e[0], "cy", 3))
-		init_obj(e, p);
+		return (init_obj(e, p));
+	return (0);
 }
 
 static int	loop(int fd, t_rt *p)
@@ -42,7 +43,8 @@ static int	loop(int fd, t_rt *p)
 		free(line);
 		if (!element)
 			return (clear_gnl(fd), ft_dprintf(2, "ft_split fail\n"), 1);
-		init_element(element, p);
+		if (init_element(element, p))
+			return (clear_gnl(fd), ft_free_array(element), 1);
 		ft_free_array(element);
 	}
 }
