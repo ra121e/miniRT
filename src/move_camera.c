@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:30:41 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 13:33:23 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/20 16:52:45 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ int	move_camera(t_rt *p, t_vec3 offset)
 		up = vec3_init(0, 0, 1);
 	p->c.x_basis = vec3_normalize(vec3_cross(up, p->c.orientation));
 	p->c.y_basis = vec3_normalize(vec3_cross(p->c.orientation, p->c.x_basis));
-//	p->c.x_basis.x = p->c.d_center.z / sqrt(p->c.d_center.z
-//			* p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
-//	p->c.x_basis.y = 0;
-//	p->c.x_basis.z = -p->c.d_center.x / sqrt(p->c.d_center.z
-//			* p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
-//	p->c.y_basis = vec3_normalize(vec3_cross(p->c.x_basis,
-//				vec3_mult(p->c.d_center, -1)));
 	init_nearest(p);
 	raytracing(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
