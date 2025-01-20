@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_acl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
+/*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:06:58 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/18 21:31:30 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/20 13:33:27 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,25 @@ void	init_a(char **e, t_rt *p)
 
 void	init_c(char **e, t_rt *p)
 {
+	t_vec3	up;
+
 	init_vec3(e[1], &p->c.position);
 	init_vec3(e[2], &p->c.orientation);
 	p->c.fov = deg2rad(ft_atoi(e[3]));
 	p->c.distance = p->win_x / 2 / tan(p->c.fov / 2);
 	p->c.d_center = vec3_mult(p->c.orientation, p->c.distance);
-	p->c.x_basis.x = p->c.d_center.z / sqrt(p->c.d_center.z
-			* p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
-	p->c.x_basis.y = 0;
-	p->c.x_basis.z = -p->c.d_center.x / sqrt(p->c.d_center.z
-			* p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
-	p->c.y_basis = vec3_normalize(vec3_cross(p->c.x_basis,
-				vec3_mult(p->c.d_center, -1)));
+	up = vec3_init(0, 1, 0);
+	if (fabs(p->c.orientation.y) > 0.9999)
+		up = vec3_init(0, 0, 1);
+	p->c.x_basis = vec3_normalize(vec3_cross(up, p->c.orientation));
+	p->c.y_basis = vec3_normalize(vec3_cross(p->c.orientation, p->c.x_basis));
+//	p->c.x_basis.x = p->c.d_center.z / sqrt(p->c.d_center.z
+//			* p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
+//	p->c.x_basis.y = 0;
+//	p->c.x_basis.z = -p->c.d_center.x / sqrt(p->c.d_center.z
+//			* p->c.d_center.z + p->c.d_center.x * p->c.d_center.x);
+//	p->c.y_basis = vec3_normalize(vec3_cross(p->c.x_basis,
+//				vec3_mult(p->c.d_center, -1)));
 }
 
 void	init_l(char **e, t_rt *p)
