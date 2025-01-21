@@ -58,7 +58,6 @@ void	shadow(t_rt *p, int i)
 	light_distance = vec3_mag(p->pi2l) - DELTA;
 	ray.direction = p->shadow_direction;
 	ray.start = p->shadow_start;
-	i = -1;
 	while (++i < p->nb_obj)
 	{
 		assign_obj(p, i);

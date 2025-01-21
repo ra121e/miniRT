@@ -20,11 +20,6 @@ void	assign_sp(t_rt *p, int i)
 	p->sp.material.kdif = p->obj[i]->material.kdif;
 	p->sp.material.kspe = p->obj[i]->material.kspe;
 	p->sp.material.shine = p->obj[i]->material.shine;
-//	init_vec3(e[1], &p->sp.center);
-//	p->sp.radius = ft_atof(e[2]);
-//	init_rgb(e[3], &p->sp.material.kdif);
-//	p->sp.material.kspe = fcolor_init(0.9, 0.9, 0.9);
-//	p->sp.material.shine = 80;
 }
 
 void	assign_pl(t_rt *p, int i)
@@ -35,12 +30,6 @@ void	assign_pl(t_rt *p, int i)
 	p->pl.material.kdif = p->obj[i]->material.kdif;
 	p->pl.material.kspe = p->obj[i]->material.kspe;
 	p->pl.material.shine = p->obj[i]->material.shine;
-//	init_vec3(e[1], &p->pl.center);
-//	init_vec3(e[2], &p->pl.normal);
-//	p->pl.normal = vec3_normalize(p->pl.normal);
-//	init_rgb(e[3], &p->pl.material.kdif);
-//	p->pl.material.kspe = fcolor_init(1.0, 1.0, 1.0);
-//	p->pl.material.shine = 100;
 }
 
 void	assign_cy(t_rt *p, int i)
@@ -54,15 +43,6 @@ void	assign_cy(t_rt *p, int i)
 	p->cy.material.kdif = p->obj[i]->material.kdif;
 	p->cy.material.kspe = p->obj[i]->material.kspe;
 	p->cy.material.shine = p->obj[i]->material.shine;
-//	p->cy.type = CYLINDER;
-//	init_vec3(e[1], &p->cy.center);
-//	init_vec3(e[2], &p->cy.normal);
-//	p->cy.normal = vec3_normalize(p->cy.normal);
-//	p->cy.radius = ft_atof(e[3]) / 2;
-//	p->cy.height = ft_atof(e[4]);
-//	init_rgb(e[5], &p->cy.material.kdif);
-//	p->cy.material.kspe = fcolor_init(0.9, 0.9, 0.9);
-//	p->cy.material.shine = 100;
 }
 
 void	assign_obj(t_rt *p, int i)
