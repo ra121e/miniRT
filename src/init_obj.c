@@ -21,6 +21,7 @@ void	init_sp(char **e, t_object *obj)
 	obj->radius = ft_atof(e[2]);
 	init_rgb(e[3], &kdif);
 	obj->material.kdif = fcolor_init(kdif.red / 255, kdif.green / 255, kdif.blue / 255);	obj->material.kspe = fcolor_init(0.9, 0.9, 0.9);
+	obj->material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	obj->material.shine = 80;
 }
 
