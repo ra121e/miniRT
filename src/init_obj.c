@@ -14,34 +14,42 @@
 
 void	init_sp(char **e, t_object *obj)
 {
+	t_fcolor	kdif;
+
 	obj->type = SPHERE;
 	init_vec3(e[1], &obj->center);
 	obj->radius = ft_atof(e[2]);
-	init_rgb(e[3], &obj->material.kdif);
-	obj->material.kspe = fcolor_init(0.9, 0.9, 0.9);
+	init_rgb(e[3], &kdif);
+	obj->material.kdif = fcolor_init(kdif.red / 255, kdif.green / 255, kdif.blue / 255);	obj->material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	obj->material.shine = 80;
 }
 
 void	init_pl(char **e, t_object *obj)
 {
+	t_fcolor	kdif;
+
 	obj->type = PLANE;
 	init_vec3(e[1], &obj->center);
 	init_vec3(e[2], &obj->normal);
 	obj->normal = vec3_normalize(obj->normal);
-	init_rgb(e[3], &obj->material.kdif);
+	init_rgb(e[3], &kdif);
+	obj->material.kdif = fcolor_init(kdif.red / 255, kdif.green / 255, kdif.blue / 255);
 	obj->material.kspe = fcolor_init(1.0, 1.0, 1.0);
 	obj->material.shine = 100;
 }
 
 void	init_cy(char **e, t_object *obj)
 {
+	t_fcolor	kdif;
+
 	obj->type = CYLINDER;
 	init_vec3(e[1], &obj->center);
 	init_vec3(e[2], &obj->normal);
 	obj->normal = vec3_normalize(obj->normal);
 	obj->radius = ft_atof(e[3]) / 2;
 	obj->height = ft_atof(e[4]);
-	init_rgb(e[5], &obj->material.kdif);
+	init_rgb(e[5], &kdif);
+	obj->material.kdif = fcolor_init(kdif.red / 255, kdif.green / 255, kdif.blue / 255);	obj->material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	obj->material.kspe = fcolor_init(0.9, 0.9, 0.9);
 	obj->material.shine = 100;
 }
