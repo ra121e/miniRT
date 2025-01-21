@@ -6,11 +6,11 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/21 20:26:29 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 20:00:04 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "miniRT_bonus.h"
 
 void	screen(t_rt *p, double x, double y)
 {
@@ -77,6 +77,7 @@ int	raytracing(t_rt *p)
 			screen(p, x, y);
 			intersection(p, x, y, -1);
 			diffuse(p, x, y);
+			specular(p, x, y);
 			shadow(p, -1);
 			draw(p, x, y);
 		}

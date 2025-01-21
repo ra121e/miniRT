@@ -6,11 +6,11 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:04:10 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/21 20:18:55 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 20:02:17 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "miniRT_bonus.h"
 
 t_fcolor	fcolor_normalize(t_fcolor fcolor)
 {

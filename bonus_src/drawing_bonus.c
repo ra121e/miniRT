@@ -6,11 +6,11 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:17:51 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/21 20:27:03 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 20:01:40 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "miniRT_bonus.h"
 
 int	color(t_rt *p)
 {
@@ -19,7 +19,6 @@ int	color(t_rt *p)
 	int			blue;
 	int			rgb;
 
-	p->r_s = fcolor_init(0, 0, 0);
 	p->r_surface = fcolor_add(p->r_d, p->r_s);
 	if (p->yes_shadow == true)
 		p->r_surface = fcolor_init(0, 0, 0);

@@ -6,11 +6,11 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:18:04 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/21 20:19:28 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 20:02:31 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "miniRT_bonus.h"
 
 void	diffuse(t_rt *p, int x, int y)
 {
