@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 07:26:00 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/19 12:11:37 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 18:58:55 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,11 @@ int	clear_gnl(int fd)
 		}
 		free(line);
 	}
+}
+
+void	ft_free_obj(t_rt *p, int i)
+{
+	while (i--)
+		free(p->obj[i]);
+	free(p->obj);
 }

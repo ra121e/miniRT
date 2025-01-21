@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:28:37 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/16 17:48:05 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 19:01:47 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	close_win(void *param)
 	t_rt	*p;
 
 	p = param;
+	ft_free_obj(p, p->nb_obj);
 	mlx_destroy_window(p->mlx, p->win);
 	mlx_destroy_display(p->mlx);
 	free(p->mlx);

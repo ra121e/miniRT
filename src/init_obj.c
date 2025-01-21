@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 23:06:58 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 21:36:58 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 19:03:58 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ int	init_obj(char **e, t_rt *p)
 	p->obj[++i] = malloc(sizeof(t_object));
 	if (!p->obj[i])
 	{
-		while (i--)
-			free(p->obj[i]);
-		free(p->obj);
+		ft_free_obj(p, i);
 		return (ft_dprintf(2, "Failed to malloc obj[i]\n"), 1);
 	}
 	if (!ft_strncmp(*e, "sp", 3))

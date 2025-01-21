@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/20 23:15:47 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/21 18:59:16 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,7 @@ int				is_int(char *str);
 int				is_double(char *str);
 double			ft_atof(char *str);
 int				clear_gnl(int fd);
+void			ft_free_obj(t_rt *p, int i);
 
 // vector utils
 t_vec3			vec3_init(double x, double y, double z);
