@@ -6,7 +6,7 @@
 /*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:48:20 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/10 18:50:06 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/25 14:14:09 by xlok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	validate_rgb(char *str)
 
 	rgb = ft_split(str, ',');
 	if (!rgb)
-		return (dprintf(2, "ft_split fail\n"), 1);
+		return (ft_dprintf(2, "ft_split fail\n"), 1);
 	i = -1;
 	while (rgb[++i])
 		if (ft_strlen(rgb[i]) > 3 || !is_int(rgb[i])
@@ -37,7 +37,7 @@ int	validate_vec3(char *str, double min, double max)
 
 	vec3 = ft_split(str, ',');
 	if (!vec3)
-		return (dprintf(2, "ft_split fail\n"), 1);
+		return (ft_dprintf(2, "ft_split fail\n"), 1);
 	i = -1;
 	while (vec3[++i])
 		if (!is_double(vec3[i])
