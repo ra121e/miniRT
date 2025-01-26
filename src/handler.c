@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlok <xlok@student.42singapore.sg>         +#+  +:+       +#+        */
+/*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:28:37 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/21 19:01:47 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/26 14:00:42 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ int	handler_key(int keycode, void *param)
 	if (keycode == XK_Escape)
 		close_win(p);
 	else if (keycode == XK_a || keycode == XK_Left)
-		move_camera(p, vec3_init(-1, 0, 0));
+		turn_camera(p, -(M_PI / 36));
 	else if (keycode == XK_w || keycode == XK_Up)
-		move_camera(p, vec3_init(0, 1, 0));
+		roll_camera(p, -(M_PI / 36));
 	else if (keycode == XK_d || keycode == XK_Right)
-		move_camera(p, vec3_init(1, 0, 0));
+		turn_camera(p, M_PI / 36);
 	else if (keycode == XK_s || keycode == XK_Down)
-		move_camera(p, vec3_init(0, -1, 0));
+		roll_camera(p, M_PI / 36);
 	else if (keycode == XK_Page_Up)
-		move_camera(p, vec3_init(0, 0, 1));
+		move_camera(p, p->c.orientation);
 	else if (keycode == XK_Page_Down)
-		move_camera(p, vec3_init(0, 0, -1));
+		move_camera(p, vec3_mult(p->c.orientation, -1));
 	return (0);
 }

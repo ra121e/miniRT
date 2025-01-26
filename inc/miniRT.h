@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:03:59 by xlok              #+#    #+#             */
-/*   Updated: 2025/01/21 18:59:16 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/26 13:34:18 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,8 @@ int				raytracing(t_rt *p);
 int				raytracing_pl(t_rt *p);
 int				raytracing_cy(t_rt *p);
 int				move_camera(t_rt *p, t_vec3 offset);
+int				turn_camera(t_rt *p, double angle);
+int				roll_camera(t_rt *p, double angle);
 
 // general utils
 int				is_int(char *str);
