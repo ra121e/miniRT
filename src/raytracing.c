@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:08:08 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/20 23:16:31 by xlok             ###   ########.fr       */
+/*   Updated: 2025/01/28 10:34:42 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ void	screen(t_rt *p, double x, double y)
 	p->ray_start = p->c.position;
 }
 
-void	intersection(t_rt *p, int x, int y, int i)
+void	intersection(t_rt *p, int x, int y)
 {
 	t_intersection	tmp;
 	t_ray			ray;
+	int				i;
 
 	ray.direction = p->ray_direction;
 	ray.start = p->ray_start;
+	i = -1;
 	while (++i < p->nb_obj)
 	{
 		assign_obj(p, i);
@@ -75,10 +77,10 @@ int	raytracing(t_rt *p)
 		while (++y < p->win_y)
 		{
 			screen(p, x, y);
-			intersection(p, x, y, -1);
+			intersection(p, x, y);
 			diffuse(p, x, y);
 			specular(p, x, y);
-			shadow(p, -1);
+			shadow(p);
 			draw(p, x, y);
 		}
 	}
